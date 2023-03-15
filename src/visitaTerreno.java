@@ -1,4 +1,4 @@
-package sprintCapacitacion;
+package sprint;
 
 public class visitaTerreno {
     private int idVisita;
