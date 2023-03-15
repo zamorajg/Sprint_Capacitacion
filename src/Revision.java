@@ -39,7 +39,7 @@ public class Revision {
     }
 
     /**
-     * Metodo que establece que el nombre de la revision no este vacia y valida que
+     * Método que establece que el nombre de la revision no este vacía y válida que
      * no sea menor a 10 caracteres y no exceda de 50
      * @param nombreRev nombre de la revision
      */
