@@ -3,17 +3,18 @@ package sprint;
 import java.text.SimpleDateFormat;
 
 public class Accidente {
-	Integer idAccidente;
+	private Integer idAccidente;
 	Usuario run;
-	String fecha;
+	private String fecha;
 	int hora;
-	String lugar;
-	String origen;
-	String consecuencias;
+	private String lugar;
+	private String origen;
+	private String consecuencias;
 
-	public Accidente(Integer idAccidente, Usuario run, String fecha, int hora, String lugar, String origen,
+	public Accidente(Integer idAccidente, int run, String fecha, int hora, String lugar, String origen,
 			String consecuencias) {
 		this.idAccidente = idAccidente;
+		Usuario.run = run;
 		this.fecha = fecha;
 		this.hora = hora;
 		this.lugar = lugar;

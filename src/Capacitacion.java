@@ -4,13 +4,13 @@ import java.text.SimpleDateFormat;
 
 public class Capacitacion {
 
-	int idCapacitacion;
+	private int idCapacitacion;
 	Usuario run;
-	String dia;
-	int hora;
-	String lugar;
-	String duracion;
-	int cantAsistentes;
+	private String dia;
+	private int hora;
+	private String lugar;
+	private String duracion;
+	private int cantAsistentes;
 
 	public Capacitacion(int idCapacitacion, int run, String dia, int hora, String lugar, String duracion,
 			int cantAsistentes) {
