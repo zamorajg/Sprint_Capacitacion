@@ -1,6 +1,6 @@
 // Version 1.0
 
-package Grupal8.Grupal8;
+package sprint;
 
 /**
  * @Definicion: Clase usuario y se definen los parametros(nombre, fechaNacimiento y rut).
@@ -14,14 +14,14 @@ import java.util.Scanner;
 public class Usuario implements Asesoria {
 	// Creación de los atributos de la Clase Usuario
 	private static Scanner input = new Scanner (System.in);
-    private static ArrayList<String> clientes = new ArrayList<String>();
+    private static ArrayList<Asesoria> clientes = new ArrayList<Asesoria>();
 	protected static String nombre; //nombres que identifica al usuario
 	protected static String fechaNacimiento; //fecha de nacimiento del usuario
-	protected  static int run; // RUN del usuario (menor a 99.999.999)
+	protected  static Integer run; // RUN del usuario (menor a 99.999.999)
 	
 
 	// Constructor con todos los parametros.
-	public Usuario(String nombre, String fechaNacimiento, int run) {
+	public Usuario(String nombre, String fechaNacimiento, Integer run) {
 		Usuario.nombre = nombre;
 		Usuario.fechaNacimiento = fechaNacimiento;
 		Usuario.run = run;
@@ -94,30 +94,26 @@ public class Usuario implements Asesoria {
      *
      * @param Cliente.run  el nuevo run del Usuario.
      */
-	public void setRun(int run) {
-		if (run < 99999999 && run > 999999)
-		Usuario.run = run;
+	public void setRun(Integer run) {
+		if (run < 99999999 && run > 999999) {
+		Usuario.run = run;}
+		else {
+			System.out.println("Ingrese rut valido");
+		}
 	}
 
-	// Metodo toString().
-	@Override
-    /**
-     * Devuelve una representación en cadena de la instancia de la clase Usuario
-     *
-     * @return Una representación en cadena de la instancia de la clase Usuario
-     */
-	
-	
-	public String toString() {
-		return "Usuario [nombre = " + nombre + ", fechaNacimiento = " + fechaNacimiento + ", rut = " + run +"]";
-	}
 
-	@Override
+	
+	public String mostrarEdad() {
+		return "El Usuario: " + nombre + " tiene " + Cliente.getEdad();
+	}
+	
 	public String analizarUsuario() {
-		return "Nombre de Usuario: " + nombre ;
-
-		
+		return "Usuario [nombre = " + nombre + ", rut = " + run +"]";
 	}
+
+	
+	
 
 
 	

@@ -1,15 +1,17 @@
-package Sprint;
+package sprint;
 
 public class Administrativo extends Usuario{
 	private String experienciaPrevia;
 	private String area;
+	protected static String[][] contenedor;  // revisar si es usuario o contenedor
+
 
 	public Administrativo() {
 		super();
 	}
 	
 	public Administrativo(String experienciaPrevia, String area) {
-		super (nombre, fechaNacimiento, rut);
+		super (nombre, fechaNacimiento, run);
 		this.experienciaPrevia = experienciaPrevia;
 		this.area = area;
 		

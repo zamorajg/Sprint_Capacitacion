@@ -1,6 +1,6 @@
-package Sprint;
+package sprint;
 
-
+import java.util.ArrayList;
 
 /**
  * @Definicion: de la Clase: Clase para mantener los Clientes que recibirán los usuarios que se capacitaran
@@ -19,9 +19,10 @@ public class Cliente extends Usuario {
     private int sistemaSalud;
     private String direccion;
     private String comuna;
-    private int edad;
-    //private int cantidadAccidentes;
-    
+    private static int edad;
+    ArrayList<Capacitacion> capacitaciones = new ArrayList<Capacitacion>(); // lista de Capacitaciones
+    ArrayList<Accidente> accidentes = new ArrayList<Accidente>(); // lista de Accidentes
+    ArrayList<visitaTerreno> visitasTerreno = new ArrayList<visitaTerreno>(); // lista de Visitas en Terreno
     
 	public Cliente(String nombre, String apellidos, int telefono,
     		String afp, int sistemaSalud, String direccion, String comuna, int edad, String String) {
@@ -33,7 +34,7 @@ public class Cliente extends Usuario {
     	this.sistemaSalud = sistemaSalud;
     	this.direccion = direccion;
     	this.comuna = comuna;
-    	this.edad = edad;
+    	Cliente.edad = edad;
     }
 
     public Cliente () {
@@ -189,7 +190,7 @@ public class Cliente extends Usuario {
      *
      * @return la edad del Cliente.
      */
-    public int getEdad() {
+    public static int getEdad() {
         return edad;
     }
 
