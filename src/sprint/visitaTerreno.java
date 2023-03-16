@@ -5,8 +5,10 @@ public class visitaTerreno {
     private Integer rutCliente;
     private String diaAccidente;
     private String hora;
-    private String Lugar;
-    private String Comentarios;
+    private String lugar;
+    private String comentarios;
+
+    private Revision revision;
 
     public visitaTerreno() {
     }
@@ -16,8 +18,10 @@ public class visitaTerreno {
         this.rutCliente = rutCliente;
         this.diaAccidente = diaAccidente;
         this.hora = hora;
-        Lugar = lugar;
-        Comentarios = comentarios;
+        this.lugar = lugar;
+        this.comentarios = comentarios;
+        this.revision = new Revision();
+
     }
 
     public int getIdVisita() {
@@ -83,20 +87,20 @@ public class visitaTerreno {
     }
 
     public String getLugar() {
-        return Lugar;
+        return lugar;
     }
 
     public void setLugar(String lugar) {
-        Lugar = lugar;
+        this.lugar = lugar;
     }
 
     public String getComentarios() {
-        return Comentarios;
+        return comentarios;
     }
 
     public void setComentarios(String comentarios) {
         if (comentarios.length()>100)
-            Comentarios = comentarios;
+            this.comentarios = comentarios;
     }
 
     @Override
@@ -106,8 +110,8 @@ public class visitaTerreno {
                 ", rutCliente='" + rutCliente + '\'' +
                 ", diaAccidente='" + diaAccidente + '\'' +
                 ", hora='" + hora + '\'' +
-                ", Lugar='" + Lugar + '\'' +
-                ", Comentarios='" + Comentarios + '\'' +
+                ", Lugar='" + lugar + '\'' +
+                ", Comentarios='" + comentarios + '\'' +
                 '}';
     }
 }

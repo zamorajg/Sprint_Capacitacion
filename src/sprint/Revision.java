@@ -1,4 +1,4 @@
-package sprint.sprint;
+package sprintCapacitacion;
 
 public class Revision {
     private int idRevision;
