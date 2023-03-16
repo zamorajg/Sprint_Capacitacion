@@ -5,9 +5,9 @@ import java.util.List;
 
 public class Capacitacion {
 
-	private List<Cliente> clienteCapacitacion = new ArrayList<Cliente>();
+	private List<Capacitacion> capacitaciones = new ArrayList<Capacitacion>();
 	private Integer idCapacitacion;
-	Usuario run;
+	Cliente run;
 	private String dia;
 	private Integer hora;
 	private String lugar;
@@ -22,7 +22,10 @@ public class Capacitacion {
 		this.lugar = lugar;
 		this.duracion = duracion;
 		this.cantAsistentes = cantAsistentes;
-		Usuario.run = run;
+		Cliente.run = run;
+	}
+
+	public Capacitacion() {
 	}
 
 	public int getIdCapacitacion() {
@@ -30,11 +33,7 @@ public class Capacitacion {
 	}
 
 	public void setIdCapacitacion(Integer idCapacitacion) {
-		if (idCapacitacion != null) {
-			this.idCapacitacion = idCapacitacion;
-		} else {
-			System.out.println("Ingrese un valor numerico para la id");
-		}
+		this.idCapacitacion = idCapacitacion;
 	}
 
 	public String getDia() {
@@ -42,10 +41,9 @@ public class Capacitacion {
 	}
 
 	public void setDia(String dia) {
+		System.out.println("Ingrese un dia de la semana");
 		if (dia.length() >= 5 && dia.length() <= 7) {
 			this.dia = dia;
-		}else {
-			System.out.println("Ingrese un dia de la semana");
 		}
 	}
 
@@ -62,11 +60,14 @@ public class Capacitacion {
 	}
 
 	public void setLugar(String lugar) {
-		if (lugar.length() > 10 && lugar.length() <= 50) {
-			this.lugar = lugar;
-		} else {
+		do {
 			System.out.println("Ingrese un lugar de capacitacion");
-		}
+			if (lugar.length() > 10 && lugar.length() <= 50) {
+				this.lugar = lugar;
+			} else {
+				System.out.println();
+			}
+		} while (lugar.isEmpty());
 	}
 
 	public String getDuracion() {
@@ -84,32 +85,35 @@ public class Capacitacion {
 	}
 
 	public void setCantAsistentes(Integer cantAsistentes) {
-		if (cantAsistentes < 1000) {
-			this.cantAsistentes = cantAsistentes;
-		} else {
+		do {
 			System.out.println("Ingrese la cantidad de asistentes");
-		}
+			if (cantAsistentes < 1000) {
+				this.cantAsistentes = cantAsistentes;
+			} else {System.out.println("Campo vacio");
+			}
+		} while (cantAsistentes == null);
 	}
 
-	public void agregarCliente(Cliente c) {
-		clienteCapacitacion.add(c);
+	public void agregarCapacitacion(Capacitacion c) {
+		capacitaciones.add(c);
 	}
 
 	public void clientesCapacitacion() {
-		for (Cliente c : clienteCapacitacion) {
-			c.analizarUsuario();
+		for (Capacitacion c : capacitaciones) {
+			c.mostrarDetalle();
 		}
+
 	}
 
 	public String mostrarDetalle() {
-		return "La capacitación será en " + lugar + " a las " + hora + " del día " + dia + ", y durará " + duracion
+		return "La capacitacion sera en " + lugar + " a las " + hora + " del dia " + dia + ", y durara " + duracion
 				+ " minutos";
 	}
 
 	@Override
 	public String toString() {
-		return "Rut Cliente: " +run + "/n" + mostrarDetalle();
-		
+		return "Rut Cliente: " + Cliente.run + "\n" + mostrarDetalle();
+
 	}
-	
+
 }

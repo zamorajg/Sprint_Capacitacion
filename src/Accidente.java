@@ -13,6 +13,10 @@ public class Accidente {
 	private String origen;
 	private String consecuencias;
 
+	public Accidente() {
+		
+	}
+	
 	public Accidente(Integer idAccidente, Integer run, String fecha, Integer hora, String lugar, String origen,
 			String consecuencias) {
 		this.idAccidente = idAccidente;
