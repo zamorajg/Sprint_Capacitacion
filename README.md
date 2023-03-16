@@ -29,7 +29,7 @@ Las visitas a terreno a veces no tienen el efecto indicado por la falta de coord
   
   # Descripción del menu:
   El sistema dispone de un menu en el cual se permite crear usuario, cliente, profesional, administrativo. Una vez creado el cliente se puede crear capacitaciones, asi como visitas en terreno y accidentes. Es obligatorio que cada vez que se cree un cliente se cree una visita en terreno asi como tambien a esta visita una revisión, se puede crear uno o más accidentes.
-  El menu también despliega las siguiente lista de reportes:
+El menu también despliega las siguiente lista de reportes:
   - Listar usuarios: permite desplegar la lista completa de usuarios, independiente
 del tipo. En este método solo se deben desplegar los datos de la clase usuario.
   - Listar usuarios por tipo: recibe un tipo de usuario (cliente, administrador o
@@ -37,7 +37,7 @@ profesional), y retorna los datos respectivos según el tipo de usuario.
   - Listar capacitaciones: este método despliega las capacitaciones registradas en la
 lista respectiva, junto con los datos del cliente al que está asociada dicha
 capacitación.
- A demás permite almacenar los siguientes aspectos:
+A demás permite almacenar los siguientes aspectos:
   - Almacenar cliente: permite agregar un nuevo cliente a la lista de instancias
 dela interface Asesoria.
   - Almacenar profesional: permite agregar un nuevo profesional a la lista de
@@ -46,5 +46,5 @@ instancias de la interface Asesoria.
 lista de instancias de la interface Asesoria.
   - Almacenar capacitación: permite agregar una nueva capacitación a la lista de
 instancias de la clase Capacitación.
- Y por último tiene la opción de eliminar usuario: permite eliminar un usuario desde la lista de interfaces de
+Y por último tiene la opción de eliminar usuario: permite eliminar un usuario desde la lista de interfaces de
 Asesoría acuerdo con el RUN del usuario 
