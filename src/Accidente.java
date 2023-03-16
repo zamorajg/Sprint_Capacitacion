@@ -1,17 +1,19 @@
 package sprint;
 
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Accidente {
+	private List<Cliente> registro = new ArrayList<Cliente>();
 	private Integer idAccidente;
 	Usuario run;
 	private String fecha;
-	int hora;
+	Integer hora;
 	private String lugar;
 	private String origen;
 	private String consecuencias;
 
-	public Accidente(Integer idAccidente, int run, String fecha, int hora, String lugar, String origen,
+	public Accidente(Integer idAccidente, Integer run, String fecha, Integer hora, String lugar, String origen,
 			String consecuencias) {
 		this.idAccidente = idAccidente;
 		Usuario.run = run;
@@ -46,7 +48,7 @@ public class Accidente {
 		return hora;
 	}
 
-	public void setHora(int hora) {
+	public void setHora(Integer hora) {
 		this.hora = hora;
 	}
 
@@ -82,7 +84,20 @@ public class Accidente {
 		}
 	}
 
-	public String fecha() {
-		return (new SimpleDateFormat("dd/MM/yyyy").format(fecha));
+	public void registroAccidente(Cliente cli) {
+		registro.add(cli);
 	}
+
+	public void mostrarRegistro() {
+		for (Cliente cli : registro) {
+			cli.analizarUsuario();
+		}
+	}
+
+	@Override
+	public String toString() {
+		return "Rut cliente: " + run + "\nFecha accidente: " + fecha + "\nHora: " + hora + "\nLugar: " + lugar
+				+ "\nOrigen: " + origen + "\nConsecuencias: " + consecuencias;
+	}
+
 }
