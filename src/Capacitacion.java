@@ -2,6 +2,7 @@ package sprint;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Capacitacion {
 
@@ -13,6 +14,7 @@ public class Capacitacion {
 	private String lugar;
 	private String duracion;
 	private Integer cantAsistentes;
+	Scanner sc = new Scanner(System.in);
 
 	public Capacitacion(int idCapacitacion, Integer run, String dia, String hora, String lugar, String duracion,
 			int cantAsistentes) {
@@ -78,12 +80,13 @@ public class Capacitacion {
 
 	public void setLugar(String lugar) {
 		do {
-			if (lugar.length() > 10 && lugar.length() <= 50) {
+			if (lugar.length() <10 && lugar.length() > 50){
+			System.out.println("Ingrese un lugar de capacitacion");
+			lugar = sc.nextLine();
+		}  else if (lugar.length() > 9 && lugar.length() <= 50) {
 				this.lugar = lugar;
-			} else {
-				System.out.println("Ingrese un lugar de capacitacion");
-			}
-		} while (lugar.isEmpty());
+			} 
+		} while (lugar.length() <10 || lugar.length() > 50 ||lugar.isEmpty());
 	}
 
 	public String getDuracion() {
@@ -102,12 +105,12 @@ public class Capacitacion {
 
 	public void setCantAsistentes(Integer cantAsistentes) {
 		do {
+		if (cantAsistentes > 1000) {
 			System.out.println("Ingrese la cantidad de asistentes");
-			if (cantAsistentes < 1000) {
+			cantAsistentes = Integer.parseInt(sc.nextLine());
+		}else if (cantAsistentes < 1001) {
 				this.cantAsistentes = cantAsistentes;
-			} else {
-				System.out.println("Campo vacio");
-			}
+		}
 		} while (cantAsistentes == null);
 	}
 
