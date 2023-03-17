@@ -23,7 +23,7 @@ public class Contenedor {
 		// Agrego el rut que trae de la clase padre que hereda
 		cliente.setRun(usuario.getRun());
 		// Agrego el nombre de Usuario que trae de la clase padre que hereda
-		cliente.setNombre(usuario.getNombre());
+		cliente.setNombres(usuario.getNombre());
 		// Agrego la fecha de Nacimiento que trae del padre
 		cliente.setFechaNacimiento(usuario.getFechaNacimiento());
 		// Solicito los nombres del Cliente
@@ -147,7 +147,7 @@ public class Contenedor {
 		// empresa
 		capacitacion.setIdCapacitacion(idCapacitacion++);
 		// RUT cliente: obligatorio
-		capacitacion.setRun(Integer.parseInt(Run));
+		capacitacion.setRun(Long.parseLong(Run));
 		// Día: texto, día de la semana. Debe ser un valor permitido entre “lunes” y
 		// “Domingo”(en ese formato)
 		System.out.println("Ingrese el Día de la semana. Debe ser un valor permitido entre “lunes” y “Domingo”");
@@ -212,8 +212,9 @@ public class Contenedor {
 			System.out.println(user);
 
 		}
+		
 
-	};
+	}
 
 	/**
 	 * Método que lista los usuarios por tipo (Cliente, Administrador, Profesional y
@@ -221,7 +222,7 @@ public class Contenedor {
 	 *
 	 */
 	public void ListarUsuariosPorTipo() {
-		;
+		
 		for (Asesoria user : asesorias) {
 
 			if (user instanceof Cliente) {
@@ -241,7 +242,7 @@ public class Contenedor {
 
 		}
 
-	};
+	}
 
 	/**
 	 * Capacitaciones registradas en la lista lista de Capacitaciones del Cliente,
@@ -253,12 +254,12 @@ public class Contenedor {
 		for (Capacitacion capacitacion : capacitaciones) {
 
 			System.out.println(capacitacion.toString());
-			int run = capacitacion.getRun();
+			long run = capacitacion.getRunClienteCapa();
 			this.mostrarCliente(run + "");
 
 		}
 
-	};
+	}
 
 	public void mostrarCliente(String run) {
 		boolean existe = false;
@@ -284,7 +285,7 @@ public class Contenedor {
 	 * @param run run del Usuario tipo String
 	 * @return boolean
 	 */
-	public boolean buscarRut(Integer run) {
+	public boolean buscarRut(Long run) {
 		for (Asesoria itemUsuario : asesorias) {
 			Usuario usuario = (Usuario) itemUsuario; // Casteo
 			if (usuario.getRun() == run) {
@@ -311,7 +312,7 @@ public class Contenedor {
 			System.out.println(" Ingrese el RUN del Usuario:");
 			String input = sc.nextLine();
 
-			Integer run = Integer.parseInt(input);
+			Long run = Long.parseLong(input);
 			// if (tipoUsuario.equals("Cliente")){
 			Usuario user = new Cliente();
 			asesorias.add(user);

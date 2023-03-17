@@ -8,7 +8,7 @@ public class Profesional extends Usuario {
 	public Profesional(){
 		super();
 	}
-	public Profesional(String nombre, String fechaNacimiento, Integer run, String titulo, String fechaIngreso) {
+	public Profesional(String nombre, String fechaNacimiento, Long run, String titulo, String fechaIngreso) {
 		super(nombre, fechaNacimiento, run);
 		this.titulo = titulo;
 		this.fechaIngreso = fechaIngreso;		
@@ -20,12 +20,14 @@ public class Profesional extends Usuario {
 	
 	public void setTitulo(String titulo) {
 		do {
-			if (titulo.length() > 9 && titulo.length() < 51 ) {
-				this.titulo = titulo;
-			}else {
+			if (titulo.length() < 10 || titulo.length() >50 || titulo == null) {
 				System.out.println("El titulo ingresado debe tener al menos 10 caracteres");
-		}
-		} while (titulo.length() < 10 || titulo.length() >50 || titulo == null);
+				titulo = sc.nextLine();
+			}else if (titulo.length() > 9 && titulo.length() < 51 ) {
+				this.titulo = titulo;
+				break;
+			}
+		} while (true);
 	}
 	
 	public String getFechaIngreso() {
@@ -48,6 +50,10 @@ public class Profesional extends Usuario {
 	public String analizarUsuario() {
 		return "El profesional " + super.analizarUsuario() + " posee el titulo de " + titulo + " y su fecha de ingreso es " + fechaIngreso;
 		
+	}
+	@Override
+	public String toString() {
+		return "Profesional [titulo=" + titulo + ", fechaIngreso=" + fechaIngreso + "]";
 	}
 
 }

@@ -2,7 +2,7 @@ package sprint;
 
 public class Accidente {
 	private Integer idAccidente;
-	private Integer run;
+	private Long run;
 	private String fecha;
 	private Integer hora;
 	private String lugar;
@@ -13,7 +13,7 @@ public class Accidente {
 
 	}
 
-	public Accidente(Integer idAccidente, Integer run, String fecha, Integer hora, String lugar, String origen,
+	public Accidente(Integer idAccidente, Long run, String fecha, Integer hora, String lugar, String origen,
 			String consecuencias) {
 		this.idAccidente = idAccidente;
 		this.run = run;

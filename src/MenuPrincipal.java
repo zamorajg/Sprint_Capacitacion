@@ -54,7 +54,7 @@ public class MenuPrincipal {
                 case "4":
                     System.out.println(" Ingrese el RUN del Cliente que recibirá la Capacitación:");
                     String input = sc.nextLine();
-                    int run = Integer.parseInt(input);
+                    Long run = Long.parseLong(input);
                     if(contenedora.buscarRut(run)){
                         contenedora.almacenarCapacitacion(idCapacitacion,input);
                     }else{
@@ -69,10 +69,13 @@ public class MenuPrincipal {
                     break;
                 case "6":
                     contenedora.ListarUsuarios();
+                    break;
                 case "7":
                     contenedora.ListarUsuariosPorTipo();
+                    break;
                 case "8":
                     contenedora.ListarCapacitaciones();
+                    break;
                 case "9":
                     salir = true; // vuelve salir true y sale del bucle
                     System.out.println("Saliendo del programa");
