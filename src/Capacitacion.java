@@ -5,24 +5,24 @@ import java.util.List;
 
 public class Capacitacion {
 
-	private List<Capacitacion> capacitaciones = new ArrayList<Capacitacion>();
+	private List<Cliente> clienteCapacitacion = new ArrayList<Cliente>();
 	private Integer idCapacitacion;
-	Cliente run;
+	private Integer run;
 	private String dia;
-	private Integer hora;
+	private String hora;
 	private String lugar;
 	private String duracion;
 	private Integer cantAsistentes;
 
-	public Capacitacion(int idCapacitacion, Integer run, String dia, int hora, String lugar, String duracion,
+	public Capacitacion(int idCapacitacion, Integer run, String dia, String hora, String lugar, String duracion,
 			int cantAsistentes) {
 		this.idCapacitacion = idCapacitacion;
+		this.run = run;
 		this.dia = dia;
 		this.hora = hora;
 		this.lugar = lugar;
 		this.duracion = duracion;
 		this.cantAsistentes = cantAsistentes;
-		Cliente.run = run;
 	}
 
 	public Capacitacion() {
@@ -33,7 +33,19 @@ public class Capacitacion {
 	}
 
 	public void setIdCapacitacion(Integer idCapacitacion) {
-		this.idCapacitacion = idCapacitacion;
+		do {
+			if (idCapacitacion != null) {
+				this.idCapacitacion = idCapacitacion;
+			}
+		} while (idCapacitacion == null);
+	}
+
+	public Integer getRun() {
+		return run;
+	}
+
+	public void setRun(Integer run) {
+		this.run = run;
 	}
 
 	public String getDia() {
@@ -47,12 +59,17 @@ public class Capacitacion {
 		}
 	}
 
-	public int getHora() {
+	public String getHora() {
 		return hora;
 	}
 
-	public void setHora(Integer hora) {
-		this.hora = hora;
+	public void setHora(String hora) {
+		String regex = "^(0?[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$";
+		if (hora.matches(regex)) {
+			this.hora = hora;
+		} else {
+			System.out.println("La hora introducida debe estar en el siguiente formato: HH:MM");
+		}
 	}
 
 	public String getLugar() {
@@ -61,11 +78,10 @@ public class Capacitacion {
 
 	public void setLugar(String lugar) {
 		do {
-			System.out.println("Ingrese un lugar de capacitacion");
 			if (lugar.length() > 10 && lugar.length() <= 50) {
 				this.lugar = lugar;
 			} else {
-				System.out.println();
+				System.out.println("Ingrese un lugar de capacitacion");
 			}
 		} while (lugar.isEmpty());
 	}
@@ -89,18 +105,19 @@ public class Capacitacion {
 			System.out.println("Ingrese la cantidad de asistentes");
 			if (cantAsistentes < 1000) {
 				this.cantAsistentes = cantAsistentes;
-			} else {System.out.println("Campo vacio");
+			} else {
+				System.out.println("Campo vacio");
 			}
 		} while (cantAsistentes == null);
 	}
 
-	public void agregarCapacitacion(Capacitacion c) {
-		capacitaciones.add(c);
+	public void agregarCapacitacion(Cliente c) {
+		clienteCapacitacion.add(c);
 	}
 
 	public void clientesCapacitacion() {
-		for (Capacitacion c : capacitaciones) {
-			c.mostrarDetalle();
+		for (Cliente c : clienteCapacitacion) {
+			c.analizarUsuario();
 		}
 
 	}
@@ -112,7 +129,7 @@ public class Capacitacion {
 
 	@Override
 	public String toString() {
-		return "Rut Cliente: " + Cliente.run + "\n" + mostrarDetalle();
+		return "Rut Cliente: " + run + "\n" + mostrarDetalle() + "\nCantidad de asistentes: " + cantAsistentes + "asistentes.";
 
 	}
 

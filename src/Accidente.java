@@ -1,26 +1,22 @@
 package sprint;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Accidente {
-	private List<Cliente> registro = new ArrayList<Cliente>();
 	private Integer idAccidente;
-	Usuario run;
+	private Integer run;
 	private String fecha;
-	Integer hora;
+	private Integer hora;
 	private String lugar;
 	private String origen;
 	private String consecuencias;
 
 	public Accidente() {
-		
+
 	}
-	
+
 	public Accidente(Integer idAccidente, Integer run, String fecha, Integer hora, String lugar, String origen,
 			String consecuencias) {
 		this.idAccidente = idAccidente;
-		Usuario.run = run;
+		this.run = run;
 		this.fecha = fecha;
 		this.hora = hora;
 		this.lugar = lugar;
@@ -44,9 +40,17 @@ public class Accidente {
 		return fecha;
 	}
 
-	public void setFecha(String fecha) {
-		this.fecha = fecha;
-	}
+    public void Fecha(String fecha) {
+        String regex = "^(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/\\d{4}$";
+
+        if (fecha.matches(regex)) {
+            this.fecha = fecha;
+        }
+        else {
+            System.out.println("La fecha no es valida, debe ingresarla en este formato DD/MM/AAAA");
+        }
+
+    }
 
 	public int getHora() {
 		return hora;
@@ -61,11 +65,13 @@ public class Accidente {
 	}
 
 	public void setLugar(String lugar) {
-		if (lugar.length() > 10 && lugar.length() <= 50) {
-			this.lugar = lugar;
-		} else {
-			System.out.println("Ingrese un lugar de accidente");
-		}
+		do {
+			if (lugar.length() > 10 && lugar.length() <= 50) {
+				this.lugar = lugar;
+			} else {
+				System.out.println("Ingrese un lugar de accidente");
+			}
+		} while (lugar.isEmpty());
 	}
 
 	public String getOrigen() {
@@ -85,16 +91,6 @@ public class Accidente {
 	public void setConsecuencias(String consecuencias) {
 		if (consecuencias.length() <= 100) {
 			this.consecuencias = consecuencias;
-		}
-	}
-
-	public void registroAccidente(Cliente cli) {
-		registro.add(cli);
-	}
-
-	public void mostrarRegistro() {
-		for (Cliente cli : registro) {
-			cli.analizarUsuario();
 		}
 	}
 
