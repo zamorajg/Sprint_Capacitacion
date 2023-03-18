@@ -20,11 +20,11 @@ public class Usuario implements Asesoria {
 	private static ArrayList<Asesoria> clientes = new ArrayList<Asesoria>();
 	protected static String nombre; // nombres que identifica al usuario
 	protected static String fechaNacimiento; // fecha de nacimiento del usuario
-	protected static Integer run = 0; // RUN del usuario (menor a 99.999.999)
+	protected static Long run; // RUN del usuario (menor a 99.999.999)
 	Scanner sc = new Scanner(System.in);
 
 	// Constructor con todos los parametros.
-	public Usuario(String nombre, String fechaNacimiento, Integer run) {
+	public Usuario(String nombre, String fechaNacimiento, Long run) {
 		Usuario.nombre = nombre;
 		Usuario.fechaNacimiento = fechaNacimiento;
 		Usuario.run = run;
@@ -39,7 +39,7 @@ public class Usuario implements Asesoria {
 	 *
 	 * @return nombre el nombre del Usuario.
 	 */
-	public String getNombre() {
+	public static String getNombre() {
 		return nombre;
 	}
 
@@ -52,13 +52,14 @@ public class Usuario implements Asesoria {
 	public void setNombre(String nombre) {
 		do {
 			if (nombre.length() < 10 || nombre.length() > 50 || nombre.isEmpty() || nombre.isBlank()) {
-				System.out.println("Ingrese nombre");
+				System.out.println("Ingrese nombre valido");
 				nombre = sc.nextLine();
 			}else if (nombre.length() > 9 && nombre.length() < 51) {
 				Usuario.nombre = nombre;
+				break;
 			} 
 
-		} while (nombre.length() < 10 || nombre.length() > 50 || nombre.isEmpty() || nombre.isBlank());
+		} while (true);
 
 	}
 
@@ -68,7 +69,7 @@ public class Usuario implements Asesoria {
 	 * @return fechaNacimiento la fechaNacimiento del Usuario.
 	 */
 
-	public String getFechaNacimiento() {
+	public static String getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
@@ -78,8 +79,8 @@ public class Usuario implements Asesoria {
 	 * @param fechaNacimiento la nueva fechaNacimiento del Usuario.
 	 */
 
-	public void setFechaNacimiento(String fechaNacimiento) {
-		do {
+	public void setFechaNacimiento(String fechaNacimiento) {// se cae
+
 			String regex = "^(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/\\d{4}$";
 
 			if (fechaNacimiento.matches(regex)) {
@@ -87,16 +88,14 @@ public class Usuario implements Asesoria {
 			} else {
 				System.out.println("La fecha no es valida, debe ingresarla en este formato DD/MM/AAAA");
 			}
-		} while (fechaNacimiento == null);
 	}
-
 	// Solicita y retorna el valor de rut.
 	/**
 	 * Devuelve el rut del Usuario
 	 *
 	 * @return rut del Usuario
 	 */
-	public Integer getRun() {
+	public static Long getRun() {
 		return run;
 	}
 
@@ -105,13 +104,18 @@ public class Usuario implements Asesoria {
 	 *
 	 * @param Cliente.run el nuevo run del Usuario.
 	 */
-	public void setRun(Integer run) {
-		if (run <= 99999999) {
-			Usuario.run = run;
-		}else {
-			System.out.println("Ingrese rut valido");
+	public void setRun(Long run) {
+		do {
+			if (run == 0 || run.equals(null) || run >99999999 || run < 999999) {
+				System.out.println("Ingrese rut valido");
+				run = Long.parseLong(sc.nextLine());
+			}else if (run <= 99999999 && run >999999) {
+				Usuario.run = run;
+				break;
+			}
+			}while (true);
+			
 		}
-	}
 
 	public Integer calcularEdad(String fechaNacimiento) {
 		// Parsear la fecha de nacimiento a un objeto LocalDate
@@ -124,14 +128,6 @@ public class Usuario implements Asesoria {
 		return periodo.getYears();
 	}
 
-	public String mostrarEdad() {
-		return "El Usuario: " + nombre + " tiene " + calcularEdad(fechaNacimiento);
-	}
-
-	public String analizarUsuario() {
-		return "Usuario [nombre = " + nombre + ", rut: " + run + "]";
-	}
-
 	public static ArrayList<Asesoria> getClientes() {
 		return clientes;
 	}
@@ -139,5 +135,17 @@ public class Usuario implements Asesoria {
 	public static void setClientes(ArrayList<Asesoria> clientes) {
 		Usuario.clientes = clientes;
 	}
+	
+	@Override
+	public String toString() {
+		return "Usuario [getNombre()=" + getNombre() + ", getFechaNacimiento()=" + getFechaNacimiento() + ", getRun()="
+				+ getRun() + ", mostrarEdad()=" + mostrarEdad() + ", analizarUsuario()=" + analizarUsuario() + "]";
+	}
 
+	public String mostrarEdad() {
+		return "El Usuario: " + nombre + " tiene " + calcularEdad(fechaNacimiento);
+	}
+
+	public String analizarUsuario() {
+		return "Usuario [nombre = " + nombre + ", rut: " + run + "]";}
 }

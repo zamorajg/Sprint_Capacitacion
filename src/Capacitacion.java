@@ -8,7 +8,7 @@ public class Capacitacion {
 
 	private List<Cliente> clienteCapacitacion = new ArrayList<Cliente>();
 	private Integer idCapacitacion;
-	private Integer run;
+	private Long runClienteCapa; // revisar nombre
 	private String dia;
 	private String hora;
 	private String lugar;
@@ -16,10 +16,10 @@ public class Capacitacion {
 	private Integer cantAsistentes;
 	Scanner sc = new Scanner(System.in);
 
-	public Capacitacion(int idCapacitacion, Integer run, String dia, String hora, String lugar, String duracion,
+	public Capacitacion(int idCapacitacion, Long runClienteCapa, String dia, String hora, String lugar, String duracion,
 			int cantAsistentes) {
 		this.idCapacitacion = idCapacitacion;
-		this.run = run;
+		this.runClienteCapa = runClienteCapa;
 		this.dia = dia;
 		this.hora = hora;
 		this.lugar = lugar;
@@ -42,12 +42,12 @@ public class Capacitacion {
 		} while (idCapacitacion == null);
 	}
 
-	public Integer getRun() {
-		return run;
+	public Long getRunClienteCapa() {
+		return runClienteCapa;
 	}
 
-	public void setRun(Integer run) {
-		this.run = run;
+	public void setRun(Long runClienteCapa) {
+		this.runClienteCapa = runClienteCapa;
 	}
 
 	public String getDia() {
@@ -85,8 +85,9 @@ public class Capacitacion {
 			lugar = sc.nextLine();
 		}  else if (lugar.length() > 9 && lugar.length() <= 50) {
 				this.lugar = lugar;
+				break;
 			} 
-		} while (lugar.length() <10 || lugar.length() > 50 ||lugar.isEmpty());
+		} while (true);
 	}
 
 	public String getDuracion() {
@@ -110,8 +111,9 @@ public class Capacitacion {
 			cantAsistentes = Integer.parseInt(sc.nextLine());
 		}else if (cantAsistentes < 1001) {
 				this.cantAsistentes = cantAsistentes;
+				break;
 		}
-		} while (cantAsistentes == null);
+		} while (true);
 	}
 
 	public void agregarCapacitacion(Cliente c) {
@@ -132,7 +134,7 @@ public class Capacitacion {
 
 	@Override
 	public String toString() {
-		return "Rut Cliente: " + run + "\n" + mostrarDetalle() + "\nCantidad de asistentes: " + cantAsistentes + "asistentes.";
+		return "Rut Cliente: " + runClienteCapa + "\n" + mostrarDetalle() + "\nCantidad de asistentes: " + cantAsistentes + "asistentes.";
 
 	}
 

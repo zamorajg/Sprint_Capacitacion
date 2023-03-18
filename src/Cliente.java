@@ -20,13 +20,13 @@ public class Cliente extends Usuario {
     private int sistemaSalud;
     private String direccion;
     private String comuna;
-    private static int edad;
+    private int edad;
 	Scanner sc = new Scanner(System.in);
     ArrayList<Capacitacion> capacitaciones = new ArrayList<Capacitacion>(); // lista de Capacitaciones
     ArrayList<Accidente> accidentes = new ArrayList<Accidente>(); // lista de Accidentes
     ArrayList<visitaTerreno> visitasTerreno = new ArrayList<visitaTerreno>(); // lista de Visitas en Terreno
     
-	public Cliente(String nombre, String fechaNacimiento, Integer run, String nombres, String apellidos, int telefono,
+	public Cliente(String nombre, String fechaNacimiento, Long run, String nombres, String apellidos, int telefono,
     		String afp, int sistemaSalud, String direccion, String comuna, int edad, String String) {
     	super(nombre, fechaNacimiento, run);
     	this.nombres = nombres;
@@ -36,7 +36,7 @@ public class Cliente extends Usuario {
     	this.sistemaSalud = sistemaSalud;
     	this.direccion = direccion;
     	this.comuna = comuna;
-    	Cliente.edad = edad;
+    	this.edad = edad;
     }
 
     public Cliente () {
@@ -54,8 +54,9 @@ public class Cliente extends Usuario {
 			nombres = sc.nextLine();
 		} else if (nombres.length() > 4 && nombres.length() < 31 ) {
 			this.nombres = nombres;
+			break;
 		}
-		}while (nombres.length() <5 || nombres.length() > 30 || nombres.isEmpty());
+		}while (true);
 		}
 
 	/**
@@ -79,8 +80,9 @@ public class Cliente extends Usuario {
 			apellidos = sc.nextLine();
     	}else if (apellidos.length() > 4 && apellidos.length() < 31 ) {
         this.apellidos = apellidos;
+        break;
     	}
-    	}while (apellidos.length() < 5 || apellidos.length() > 30 || apellidos.isEmpty());
+    	}while (true);
 }
     	
 
@@ -99,17 +101,17 @@ public class Cliente extends Usuario {
      * @param telefono el nuevo telefono del Cliente.
      */
     public void setTelefono(int telefono) {
-    	do {
-    		
+    	do {    		
     	if(telefono == 0) {
     		System.out.println("Ingrese telefono");
 			telefono = Integer.parseInt(sc.nextLine());
     	}else if(telefono !=0) {
         this.telefono = telefono;
+        break;
     	} else {
     	    System.out.println("Ingrese un telefono valido");
     	}
-    	} while (telefono == 0);
+    	} while (true);
     }
 
     /**
@@ -206,7 +208,7 @@ public class Cliente extends Usuario {
      *
      * @return la edad del Cliente.
      */
-    public static int getEdad() {
+    public int getEdad() {
         return edad;
     }
 
@@ -222,11 +224,10 @@ public class Cliente extends Usuario {
 			edad = Integer.parseInt(sc.nextLine());
     	}
     	else if(edad >= 0 && edad < 151) {
-        edad = edad;
-    	}else {
-    		System.out.println("Debe ingresar una edad valida");
-    	} 
-    	}while ( edad < 0 || edad > 150 );
+        this.edad = edad;
+        break;
+    	}
+    	}while ( true);
     }
     
     /**

@@ -24,6 +24,7 @@ public class ListaUsuarios {
 
     public void agregar(Usuario usuarios){ // Metodo que permite agregar Usuarios al listado
         listaUsuarios.add(usuarios);
+
     }
 
 

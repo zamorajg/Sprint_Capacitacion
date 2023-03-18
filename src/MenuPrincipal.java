@@ -3,22 +3,14 @@ package sprint;
 
 import java.util.Scanner;
 
-public class MenuPrincipal {
+public class MenuPrincipal implements Asesoria {
 
     // VARIABLES GLOBALES
     static int idCapacitacion = 0; // Correlativo de la Capacitacion
     static int idAccicente = 0; // Correlativo del Accidente
     static int idVisitaTerreno = 0; // Correlativo del Accidente
     static int idRevision = 0; // Correlativo del Accidente
-
-
-    public static void main(String[] args) {
-
-        Contenedor contenedora = new Contenedor();
-       menuOpciones(contenedora);
-
-    }
-
+   
     public static void menuOpciones(Contenedor contenedora) {
 
         boolean salir = false;
@@ -26,6 +18,7 @@ public class MenuPrincipal {
         while (!salir) {    // Menu de opciones, funciona mientras salir sea false
             System.out.println("--------------------MENU---------------------------");
             System.out.println("Por favor escoja una de las opciones del menu:");
+            System.out.println("0-. Almacenar Usuario");
             System.out.println("1-. Almacenar Cliente");
             System.out.println("2-. Almacenar Profesional");
             System.out.println("3-. Almacenar Administrativo");
@@ -38,23 +31,25 @@ public class MenuPrincipal {
 
            Scanner sc = new Scanner(System.in); // Variable que lee el valor introducido por consola
             String opcion = sc.nextLine();
+            
 
             switch (opcion) {
+            	case "0":
+	                Contenedor.ingresarUsuario(contenedora);
+	                break;
                 case "1":
-                    Usuario usuario = contenedora.ingresarUsuario("Cliente");
-                    if(usuario.getRun() == null)
-                    contenedora.almacenarCliente(contenedora.ingresarUsuario("Cliente"));
+                    Contenedor.almacenarCliente(contenedora);
                     break;
                 case "2":
-                    contenedora.almacenarProfesional(contenedora.ingresarUsuario("Profesional"));
+                	Contenedor.almacenarProfesional(contenedora); 
                     break;
                 case "3":
-                    contenedora.almacenarUsuario(contenedora.ingresarUsuario("Administrativo"));
+                	Contenedor.almacenarAdministrativo(contenedora);
                     break;
                 case "4":
                     System.out.println(" Ingrese el RUN del Cliente que recibirá la Capacitación:");
                     String input = sc.nextLine();
-                    int run = Integer.parseInt(input);
+                    Long run = Long.parseLong(input);
                     if(contenedora.buscarRut(run)){
                         contenedora.almacenarCapacitacion(idCapacitacion,input);
                     }else{
@@ -69,10 +64,13 @@ public class MenuPrincipal {
                     break;
                 case "6":
                     contenedora.ListarUsuarios();
+                    break;
                 case "7":
                     contenedora.ListarUsuariosPorTipo();
+                    break;
                 case "8":
                     contenedora.ListarCapacitaciones();
+                    break;
                 case "9":
                     salir = true; // vuelve salir true y sale del bucle
                     System.out.println("Saliendo del programa");
@@ -83,12 +81,13 @@ public class MenuPrincipal {
                     break;
             } // indica que la opcion ingresada no se encuentra dentro del menu
         }
-    } // Cierre del Main
-
-
-
-
     }
+
+	@Override
+	public String analizarUsuario() { 
+		return null ;
+	}
+}
 
 
 

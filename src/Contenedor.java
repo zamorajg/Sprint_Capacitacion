@@ -6,26 +6,59 @@ import java.util.Scanner;
 
 public class Contenedor {
 	public static ArrayList<Asesoria> asesorias = new ArrayList<Asesoria>();;
-	public ArrayList<Capacitacion> capacitaciones = new ArrayList<Capacitacion>();;
-
+	public static ArrayList<Capacitacion> capacitaciones = new ArrayList<Capacitacion>();;
+	public static Scanner sc = new Scanner(System.in);
+	public static String input = "";
+	public static boolean existe = false;
 	/**
 	 * Método que permite agregar un nuevo Cliente a la lista de instancias de la
 	 * interface Asesoria
 	 * 
 	 * @param usuario
 	 */
-	public static void almacenarCliente(Usuario usuario) {
-		Scanner sc = new Scanner(System.in); // Variable que lee el valor introducido por consola
-		String input = "";
+	
+	public static void ingresarUsuario(Contenedor contenedora) {
 
+		System.out.println(" Ingrese el RUN del Usuario:");
+		String input = sc.nextLine();
+
+		Long run = Long.parseLong(input);
+		// if (tipoUsuario.equals("Cliente")){
+		Usuario user = new Usuario();
+		Contenedor.asesorias.add(user);
+		user.setRun(run);
+		System.out.println("Ingrese el nombre de Usuario: ");
+		input = sc.nextLine();
+		user.setNombre(input);
+		System.out.println(" Ingrese la fecha de Nacimiento del Usuario(DD/MM/AAAA):");
+		input = sc.nextLine();
+		user.setFechaNacimiento(input);
+		Contenedor.asesorias.add(user);
+		System.out.println("El Usuario ha sido guardado exitosamente");
+}
+	
+	public static void almacenarCliente(Contenedor contenedora) {
+		do {
+			System.out.println(" Ingrese el RUN del Usuario:");
+			Long input = sc.nextLong();
+			if (buscarRut(input)==false) {	
+				break;
+			}else {
+				System.out.println("El rut ingresado no se encuentra registrado");
+				MenuPrincipal.menuOpciones(contenedora);
+			}
+
+		}while(true);
+		
+		String input = sc.nextLine();
 		// Ingreso los datos del Cliente
 		Cliente cliente = new Cliente();
 		// Agrego el rut que trae de la clase padre que hereda
-		cliente.setRun(usuario.getRun());
+		cliente.setRun(Usuario.getRun());
 		// Agrego el nombre de Usuario que trae de la clase padre que hereda
-		cliente.setNombre(usuario.getNombre());
+		cliente.setNombres(Usuario.getNombre());
 		// Agrego la fecha de Nacimiento que trae del padre
-		cliente.setFechaNacimiento(usuario.getFechaNacimiento());
+		cliente.setFechaNacimiento(Usuario.getFechaNacimiento());
 		// Solicito los nombres del Cliente
 		System.out.println(" Ingrese los Nombres de Cliente:");
 		input = sc.nextLine();
@@ -71,18 +104,26 @@ public class Contenedor {
 	 * 
 	 * @param usuario
 	 */
-	public static void almacenarProfesional(Usuario usuario) {
-		Scanner sc = new Scanner(System.in); // Variable que lee el valor introducido por consola
-		String input = "";
+	public static void almacenarProfesional(Contenedor contenedora) {
+		do {
+			System.out.println(" Ingrese el RUN del Usuario:");
+			Long input = sc.nextLong();
+			if (buscarRut(input)==false) {	
+				break;
+			}else {
+				System.out.println("El rut ingresado no se encuentra registrado");
+				MenuPrincipal.menuOpciones(contenedora);
+			}
 
+		}while(true);
 		// Ingreso los datos del Profesiona
 		Profesional profesional = new Profesional();
 		// Agrego el rut que trae de la clase padre que hereda
-		profesional.setRun(usuario.getRun());
+		profesional.setRun(Usuario.getRun());
 		// Agrego el nombre de Usuario que trae de la clase padre que hereda
-		profesional.setNombre(usuario.getNombre());
+		profesional.setNombre(Usuario.getNombre());
 		// Agrego la fecha de Nacimiento que trae del padre
-		profesional.setFechaNacimiento(usuario.getFechaNacimiento());
+		profesional.setFechaNacimiento(Usuario.getFechaNacimiento());
 		// Solicito el titulo
 		System.out.println("Ingrese el titulo del profesional: ");
 		input = sc.nextLine();
@@ -104,18 +145,26 @@ public class Contenedor {
 	 * 
 	 * @param usuario
 	 */
-	public static void almacenarAdministrativo(Usuario usuario) {
-		Scanner sc = new Scanner(System.in); // Variable que lee el valor introducido por consola
-		String input = "";
+	public static void almacenarAdministrativo(Contenedor contenedora) {
+		do {
+			System.out.println(" Ingrese el RUN del Usuario:");
+			Long input = sc.nextLong();
+			if (buscarRut(input)==false) {	
+				break;
+			}else {
+				System.out.println("El rut ingresado no se encuentra registrado");
+				MenuPrincipal.menuOpciones(contenedora);
+			}
 
+		}while(true);
 		// Ingreso los datos del Profesional
 		Administrativo administrativo = new Administrativo();
 		// Agrego el rut que trae de la clase padre que hereda
-		administrativo.setRun(usuario.getRun());
+		administrativo.setRun(Usuario.getRun());
 		// Agrego el nombre de Usuario que trae de la clase padre que hereda
-		administrativo.setNombre(usuario.getNombre());
+		administrativo.setNombre(Usuario.getNombre());
 		// Agrego la fecha de Nacimiento que trae del padre
-		administrativo.setFechaNacimiento(usuario.getFechaNacimiento());
+		administrativo.setFechaNacimiento(Usuario.getFechaNacimiento());
 		// Solicito el Area
 		System.out.println("Ingrese el área de Trabajo: ");
 		input = sc.nextLine();
@@ -137,9 +186,8 @@ public class Contenedor {
 	 * @param idCapacitacion
 	 * @param Run
 	 */
-	public void almacenarCapacitacion(int idCapacitacion, String Run) { // Ojo cambiar por int Run
-		Scanner sc = new Scanner(System.in); // Variable que lee el valor introducido por consola
-		String input = "";
+	public static void almacenarCapacitacion(int idCapacitacion, String Run) { // Ojo cambiar por int Run
+
 
 		// Ingreso los datos de la Capacitacion
 		Capacitacion capacitacion = new Capacitacion();
@@ -147,7 +195,7 @@ public class Contenedor {
 		// empresa
 		capacitacion.setIdCapacitacion(idCapacitacion++);
 		// RUT cliente: obligatorio
-		capacitacion.setRun(Integer.parseInt(Run));
+		capacitacion.setRun(Long.parseLong(Run));
 		// Día: texto, día de la semana. Debe ser un valor permitido entre “lunes” y
 		// “Domingo”(en ese formato)
 		System.out.println("Ingrese el Día de la semana. Debe ser un valor permitido entre “lunes” y “Domingo”");
@@ -181,8 +229,8 @@ public class Contenedor {
 	 * 
 	 * @param run
 	 */
-	public void eliminarUsuario(String run) {
-		boolean existe = false;
+	public static void eliminarUsuario(String run) {
+
 		// Iterar sobre la lista de Interface de asesoria y buscar el objeto que tenga
 		// el mismo rut
 		for (Iterator<Asesoria> iter = asesorias.iterator(); iter.hasNext();) {
@@ -207,13 +255,14 @@ public class Contenedor {
 	 * tipo este metodo solo desplega los datos de la clase usuario
 	 *
 	 */
-	public void ListarUsuarios() {
+	public static void ListarUsuarios() {
 		for (Asesoria user : asesorias) {
 			System.out.println(user);
 
 		}
+		
 
-	};
+	}
 
 	/**
 	 * Método que lista los usuarios por tipo (Cliente, Administrador, Profesional y
@@ -221,7 +270,7 @@ public class Contenedor {
 	 *
 	 */
 	public void ListarUsuariosPorTipo() {
-		;
+		
 		for (Asesoria user : asesorias) {
 
 			if (user instanceof Cliente) {
@@ -241,7 +290,7 @@ public class Contenedor {
 
 		}
 
-	};
+	}
 
 	/**
 	 * Capacitaciones registradas en la lista lista de Capacitaciones del Cliente,
@@ -253,15 +302,15 @@ public class Contenedor {
 		for (Capacitacion capacitacion : capacitaciones) {
 
 			System.out.println(capacitacion.toString());
-			int run = capacitacion.getRun();
+			long run = capacitacion.getRunClienteCapa();
 			this.mostrarCliente(run + "");
 
 		}
 
-	};
+	}
 
 	public void mostrarCliente(String run) {
-		boolean existe = false;
+
 		// Iterar sobre la lista de Interface de asesoría y buscar el objeto que tenga
 		// el mismo rut
 		for (Iterator<Asesoria> iter = asesorias.iterator(); iter.hasNext();) {
@@ -284,7 +333,7 @@ public class Contenedor {
 	 * @param run run del Usuario tipo String
 	 * @return boolean
 	 */
-	public boolean buscarRut(Integer run) {
+	public static boolean buscarRut(Long run) {
 		for (Asesoria itemUsuario : asesorias) {
 			Usuario usuario = (Usuario) itemUsuario; // Casteo
 			if (usuario.getRun() == run) {
@@ -298,31 +347,9 @@ public class Contenedor {
 	 * Metodo que almacena en la lista de interfaz cada vez que se crea un usuario
 	 * 
 	 * @param usuario
+	 * @return 
 	 */
-	public void almacenarUsuario(Usuario usuario) {
-		asesorias.add(usuario);
-	}
 
-	public static Usuario ingresarUsuario(String tipoUsuario) {
-		// Pido los datos básicos para crear el usuario
-
-			boolean existe = false;
-			Scanner sc = new Scanner(System.in);
-			System.out.println(" Ingrese el RUN del Usuario:");
-			String input = sc.nextLine();
-
-			Integer run = Integer.parseInt(input);
-			// if (tipoUsuario.equals("Cliente")){
-			Usuario user = new Cliente();
-			asesorias.add(user);
-			user.setRun(run);
-			System.out.println("Ingrese el nombre de Usuario: ");
-			input = sc.nextLine();
-			user.setNombre(input);
-			System.out.println(" Ingrese la fecha de Nacimiento del Usuario(DD/MM/AAAA):");
-			input = sc.nextLine();
-			user.setFechaNacimiento(input);
-			almacenarCliente(user);
-			return user;
+	
+	
 }
-	}

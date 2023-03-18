@@ -2,7 +2,7 @@ package sprint;
 
 public class visitaTerreno {
     private int idVisita;
-    private Integer rutCliente;
+    private Long rutCliente;
     private String diaAccidente;
     private String hora;
     private String lugar;
@@ -13,7 +13,7 @@ public class visitaTerreno {
     public visitaTerreno() {
     }
 
-    public visitaTerreno(int idVisita, Integer rutCliente, String diaAccidente, String hora, String lugar, String comentarios) {
+    public visitaTerreno(int idVisita, Long rutCliente, String diaAccidente, String hora, String lugar, String comentarios) {
         this.idVisita = idVisita;
         this.rutCliente = rutCliente;
         this.diaAccidente = diaAccidente;
@@ -36,7 +36,7 @@ public class visitaTerreno {
         return rutCliente;
     }
 
-    public void setRutCliente(Integer rutCliente) {
+    public void setRutCliente(Long rutCliente) {
         do {
 
             if (rutCliente <= 99999999) {
