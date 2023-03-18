@@ -39,7 +39,7 @@ public class Usuario implements Asesoria {
 	 *
 	 * @return nombre el nombre del Usuario.
 	 */
-	public String getNombre() {
+	public static String getNombre() {
 		return nombre;
 	}
 
@@ -52,7 +52,7 @@ public class Usuario implements Asesoria {
 	public void setNombre(String nombre) {
 		do {
 			if (nombre.length() < 10 || nombre.length() > 50 || nombre.isEmpty() || nombre.isBlank()) {
-				System.out.println("Ingrese nombre");
+				System.out.println("Ingrese nombre valido");
 				nombre = sc.nextLine();
 			}else if (nombre.length() > 9 && nombre.length() < 51) {
 				Usuario.nombre = nombre;
@@ -69,7 +69,7 @@ public class Usuario implements Asesoria {
 	 * @return fechaNacimiento la fechaNacimiento del Usuario.
 	 */
 
-	public String getFechaNacimiento() {
+	public static String getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
@@ -95,7 +95,7 @@ public class Usuario implements Asesoria {
 	 *
 	 * @return rut del Usuario
 	 */
-	public Long getRun() {
+	public static Long getRun() {
 		return run;
 	}
 
