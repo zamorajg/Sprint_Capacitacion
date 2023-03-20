@@ -4,7 +4,7 @@ public class Accidente {
 	private Integer idAccidente;
 	private Long run;
 	private String fecha;
-	private Integer hora;
+	private String hora;
 	private String lugar;
 	private String origen;
 	private String consecuencias;
@@ -13,7 +13,7 @@ public class Accidente {
 
 	}
 
-	public Accidente(Integer idAccidente, Long run, String fecha, Integer hora, String lugar, String origen,
+	public Accidente(Integer idAccidente, Long run, String fecha, String hora, String lugar, String origen,
 			String consecuencias) {
 		this.idAccidente = idAccidente;
 		this.run = run;
@@ -35,12 +35,23 @@ public class Accidente {
 			System.out.println("Ingrese un identificador valido");
 		}
 	}
+	
+	
+	
+
+	public Long getRun() {
+		return run;
+	}
+
+	public void setRun(Long run) {
+		this.run = run;
+	}
 
 	public String getFecha() {
 		return fecha;
 	}
 
-    public void Fecha(String fecha) {
+    public void setFecha(String fecha) {
     	String regex = "^(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/\\d{4}$";
 		do {
 			if (fecha.matches(regex)) {
@@ -52,11 +63,11 @@ public class Accidente {
 
     }
 
-	public int getHora() {
+	public String getHora() {
 		return hora;
 	}
 
-	public void setHora(Integer hora) {
+	public void setHora(String hora) {
 		this.hora = hora;
 	}
 

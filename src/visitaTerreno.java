@@ -99,7 +99,7 @@ public class visitaTerreno {
     }
 
     public void setComentarios(String comentarios) {
-        if (comentarios.length()>100)
+        if (comentarios.length()<100)
             this.comentarios = comentarios;
     }
 
@@ -114,4 +114,7 @@ public class visitaTerreno {
                 ", Comentarios='" + comentarios + '\'' +
                 '}';
     }
-}
+
+		
+	}
+

@@ -23,6 +23,7 @@ public class Revision {
     }
 
     public void setIdRevision(int idRevision) {
+    	System.out.println("Valor de la revision: " + idRevision);
         this.idRevision = idRevision;
     }
 
@@ -45,7 +46,7 @@ public class Revision {
      */
     public void setNombreRev(String nombreRev) {
         do{
-            if (nombreRev.length()<10 || nombreRev.length()>50) {
+            if (nombreRev.length()>=10 || nombreRev.length()<=50) {
                 //throw new IllegalArgumentException("El nombre debe tener mínimo 10 caracteres y máximo 50");
                 System.out.println("El nombre debe tener mínimo 10 caracteres y máximo 50");
             }else{
@@ -61,7 +62,7 @@ public class Revision {
 
     public void setDetalleRev(String detalleRev) {
 
-            if(detalleRev.length()>100)
+            if(detalleRev.length()<100)
                 System.out.println("El detalle de la revisión no debe exceder de 100 caracteres");
             else
                 this.detalleRev = detalleRev;
@@ -114,7 +115,7 @@ public class Revision {
                 ", idVisita=" + idVisita +
                 ", nombreRev='" + nombreRev + '\'' +
                 ", detalleRev='" + detalleRev + '\'' +
-                ", estadoRev=" + estadoRev +
+                ", estadoRev=" + mostrarEstado(estadoRev) +
                 '}';
     }
 }

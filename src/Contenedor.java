@@ -5,12 +5,15 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 public class Contenedor {
+	public static ArrayList<Revision> RevisionVisita = new ArrayList<Revision>();;
+	public static ArrayList<visitaTerreno> VisitaTerreno = new ArrayList<visitaTerreno>();;
 	public static ArrayList<Asesoria> asesorias = new ArrayList<Asesoria>();;
 	public static ArrayList<Capacitacion> capacitaciones = new ArrayList<Capacitacion>();;
+	public static ArrayList<Accidente> accidentes = new ArrayList<Accidente>();
 	public static Scanner sc = new Scanner(System.in);
 	public static String input = "";
 	public static boolean existe = false;
-
+	
 	private  Contenedor contenedora;
 
 	/**
@@ -302,6 +305,85 @@ public class Contenedor {
 		capacitaciones.add(capacitacion);
 	}
 
+	
+	public static void almacenarVisitaTerreno(int idVisitaTerreno, Contenedor contenedora) { // Ojo cambiar por int Run
+
+
+		// Ingreso los datos de la Capacitacion
+		visitaTerreno visitaTerreno = new visitaTerreno();
+		// Identificador: obligatorio, número interno de la capacitación manejado por la
+		// empresa
+		visitaTerreno.setIdVisita(idVisitaTerreno++);
+		// RUT cliente: obligatorio
+		do{
+			System.out.println("Ingrese el rut que registra la visita en formato numérico menor a 99.999.999(*)");
+			input = sc.nextLine();
+			if (esNumerico(input)) {
+				long run = Long.parseLong(input);
+				if (buscarRut(input)==false) {
+					System.out.println("El rut ingresado, no existe ,ingrese otro rut");
+					MenuPrincipal.menuOpciones(contenedora);
+				}else {
+					visitaTerreno.setRutCliente(run);
+					break;
+				}
+
+			}
+		}while( input.trim().isEmpty());
+		// Día: texto, día de la semana. Debe ser un valor permitido entre “lunes” y
+		// “Domingo”(en ese formato)
+		System.out.println("Ingrese la fecha de la visita (DD/MM/AAAA)");
+		input = sc.nextLine();
+		visitaTerreno.setDiaAccidente(input);
+		// Hora: debe ser una hora válida del día, en formato HH:MM (hora desde 0 a23,
+		// minutos entre 0 y 59)
+		System.out.println("Ingrese la Hora de la visita (HH:MM) :");
+		input = sc.nextLine();
+		visitaTerreno.setHora(input);
+		// Lugar: obligatorio, mínimo 10 caracteres, máximo 50
+		System.out.println("Ingrese el lugar de la visita, mínimo 10 caracteres, máximo 50)");
+		input = sc.nextLine();
+		visitaTerreno.setLugar(input);
+		// Comentarios: máximo 100 caracteres
+		System.out.println("Ingrese comentarios)");
+		input = sc.nextLine();
+		visitaTerreno.setComentarios(input);
+
+
+		VisitaTerreno.add(visitaTerreno);
+		System.out.println("Visita en terreno registrada.");
+		System.out.println(visitaTerreno.toString());
+	}
+	public static void almacenarRevision(int idVisita, int idRevision, Contenedor contenedora) { // Ojo cambiar por int Run
+
+
+		// Ingreso los datos de la Capacitacion
+		Revision revisionVisita = new Revision();
+		// Identificador: obligatorio, número interno de la capacitación manejado por la
+		// empresa
+		revisionVisita.setIdRevision(idRevision++);
+		revisionVisita.setIdVisita(idVisita);
+		System.out.println("Valor: " + idRevision + "Valor: " + idVisita);
+		System.out.println("Ingrese nombre de la revision(minimo 10 caracteres, maximo 50):");
+		input = sc.nextLine();
+		
+		revisionVisita.setNombreRev(input);
+		// Lugar: obligatorio, mínimo 10 caracteres, máximo 50
+		System.out.println("Ingrese detalle a revisar(maximo 100 caracteres): ");
+		input = sc.nextLine();
+		revisionVisita.setDetalleRev(input);
+		// Comentarios: máximo 100 caracteres
+		System.out.println("Ingrese estado de la revision(1(sin problemas),2(con observaciones),3(no aprueba))");
+		input = sc.nextLine();
+		revisionVisita.setEstadoRev(Integer.parseInt(input));
+
+
+		RevisionVisita.add(revisionVisita);
+		System.out.println("Revision visita registrada.");
+		System.out.println(revisionVisita.toString());
+	}
+
+	
 	/**
 	 * Método que permite eliminar un usuario desde la lista de interfaces de
 	 * asesoria de acuerdo con el run del Usuario
@@ -330,6 +412,58 @@ public class Contenedor {
 		}
 		if (existe == false)
 			System.out.println("El rut a eliminar no existe, intentelo con un rut válido");
+	}
+	
+	public static void almacenarAccidente(int idAccidente, Contenedor contenedora) { // Ojo cambiar por int Run
+
+
+		// Ingreso los datos de la Capacitacion
+		Accidente accidente = new Accidente();
+		// Identificador: obligatorio, número interno de la capacitación manejado por la
+		// empresa
+		accidente.setIdAccidente(idAccidente++);
+		// RUT cliente: obligatorio
+		do{
+			System.out.println("Ingrese el rut que registra el accidente en formato numérico menor a 99.999.999(*)");
+			input = sc.nextLine();
+			if (esNumerico(input)) {
+				long run = Long.parseLong(input);
+				if (buscarRut(input)==false) {
+					System.out.println("El rut ingresado, no existe ,ingrese otro rut");
+					MenuPrincipal.menuOpciones(contenedora);
+				}else {
+					accidente.setRun(run);
+					break;
+				}
+
+			}
+		}while( input.trim().isEmpty());
+		// Día: texto, día de la semana. Debe ser un valor permitido entre “lunes” y
+		// “Domingo”(en ese formato)
+		System.out.println("Ingrese la fecha del accidente (DD/MM/AAAA)");
+		input = sc.nextLine();
+		accidente.setFecha(input);
+		// Hora: debe ser una hora válida del día, en formato HH:MM (hora desde 0 a23,
+		// minutos entre 0 y 59)
+		System.out.println("Ingrese la Hora del accidente (HH:MM) :");
+		input = sc.nextLine();
+		accidente.setHora(input);
+		// Lugar: obligatorio, mínimo 10 caracteres, máximo 50
+		System.out.println("Ingrese el lugar del accidente, mínimo 10 caracteres, máximo 50)");
+		input = sc.nextLine();
+		accidente.setLugar(input);
+		// Duración: máximo 70 caracteres
+		System.out.println("Ingrese el origen del accidente)");
+		input = sc.nextLine();
+		accidente.setOrigen(input);
+		// Cantidad de asistentes: obligatorio, número entero menor que 1000
+		System.out.println("Ingrese las consecuencias del accidente");
+		input = sc.nextLine();
+		accidente.setConsecuencias(input);
+
+		accidentes.add(accidente);
+		System.out.println("Accidente registrado.");
+		System.out.println(accidente.toString());
 	}
 
 	/**

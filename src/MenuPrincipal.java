@@ -12,7 +12,7 @@ public class MenuPrincipal {
 
     // VARIABLES GLOBALES
     static int idCapacitacion = 0; // Correlativo de la Capacitacion
-    static int idAccicente = 0; // Correlativo del Accidente
+    static int idAccidente = 0; // Correlativo del Accidente
     static int idVisitaTerreno = 0; // Correlativo del Accidente
     static int idRevision = 0; // Correlativo del Accidente
 
@@ -31,8 +31,10 @@ public class MenuPrincipal {
             System.out.println("6-. Listar Usuarios");
             System.out.println("7-. Listar Usuarios por Tipo");
             System.out.println("8-. Listar Capacitaciones");
-            System.out.println("9-. Salir");
-
+            System.out.println("9-. Registrar Accidente");
+            System.out.println("10-. Registrar Visita en terreno");
+            System.out.println("11-. Salir");
+            
             Scanner sc = new Scanner(System.in); // Variable que lee el valor introducido por consola
             String opcion = sc.nextLine();
 
@@ -64,6 +66,14 @@ public class MenuPrincipal {
                     Contenedor.ListarCapacitaciones();
                     break;
                 case "9":
+                    Contenedor.almacenarAccidente(idAccidente, contenedora);                    
+                    break;
+                case "10":
+                	Contenedor.almacenarVisitaTerreno(idVisitaTerreno, contenedora);
+                	System.out.println("Debe crear la revision de la visita");
+                	Contenedor.almacenarRevision(idVisitaTerreno, idRevision, contenedora);
+                	break;
+                case "11":
                     salir = true; // vuelve salir true y sale del bucle
                     System.out.println("Saliendo del programa");
                     break;
