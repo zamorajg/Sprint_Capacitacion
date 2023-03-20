@@ -46,5 +46,9 @@ instancias de la interface Asesoria.
 lista de instancias de la interface Asesoria.
   - Almacenar capacitación: permite agregar una nueva capacitación a la lista de
 instancias de la clase Capacitación.
-+ Y por último tiene la opción de eliminar usuario: permite eliminar un usuario desde la lista de interfaces de
-Asesoría acuerdo con el RUN del usuario 
++ Eliminar usuario: permite eliminar un usuario desde la lista de interfaces de
+Asesoría acuerdo con el RUN del usuario.
++ Por ultimo permite enlistar lo siguiente:
+  - Usuarios sin tipo: permite desplegar la lista completa de usuarios, independiente del tipo.
+  - Usuarios por tipo: recibe un tipo de usuario y retorna los datos respectivos según el tipo.
+  - Capacitaciones: éste método despliega las capacitaciones registradas en la lista respectiva, junto con los datos del cliente al que está asociada dicha capacitación.
