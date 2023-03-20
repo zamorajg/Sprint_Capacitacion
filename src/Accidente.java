@@ -1,8 +1,8 @@
-package sprint;
+package sprintCapacitacion;
 
 public class Accidente {
 	private Integer idAccidente;
-	private Integer run;
+	private Long run;
 	private String fecha;
 	private Integer hora;
 	private String lugar;
@@ -13,7 +13,7 @@ public class Accidente {
 
 	}
 
-	public Accidente(Integer idAccidente, Integer run, String fecha, Integer hora, String lugar, String origen,
+	public Accidente(Integer idAccidente, Long run, String fecha, Integer hora, String lugar, String origen,
 			String consecuencias) {
 		this.idAccidente = idAccidente;
 		this.run = run;
@@ -41,14 +41,14 @@ public class Accidente {
 	}
 
     public void Fecha(String fecha) {
-        String regex = "^(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/\\d{4}$";
-
-        if (fecha.matches(regex)) {
-            this.fecha = fecha;
-        }
-        else {
-            System.out.println("La fecha no es valida, debe ingresarla en este formato DD/MM/AAAA");
-        }
+    	String regex = "^(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/\\d{4}$";
+		do {
+			if (fecha.matches(regex)) {
+				this.fecha = fecha;
+			} else {
+				System.out.println("La fecha no es valida");
+			}
+		} while (!fecha.matches(regex));
 
     }
 

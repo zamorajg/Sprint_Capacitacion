@@ -1,4 +1,4 @@
-package sprint;
+package sprintCapacitacion;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,9 +6,8 @@ import java.util.Scanner;
 
 public class Capacitacion {
 
-	private List<Cliente> clienteCapacitacion = new ArrayList<Cliente>();
 	private Integer idCapacitacion;
-	private Integer run;
+	private Long runClienteCapa; // revisar nombre
 	private String dia;
 	private String hora;
 	private String lugar;
@@ -16,10 +15,10 @@ public class Capacitacion {
 	private Integer cantAsistentes;
 	Scanner sc = new Scanner(System.in);
 
-	public Capacitacion(int idCapacitacion, Integer run, String dia, String hora, String lugar, String duracion,
+	public Capacitacion(int idCapacitacion, Long runClienteCapa, String dia, String hora, String lugar, String duracion,
 			int cantAsistentes) {
 		this.idCapacitacion = idCapacitacion;
-		this.run = run;
+		this.runClienteCapa = runClienteCapa;
 		this.dia = dia;
 		this.hora = hora;
 		this.lugar = lugar;
@@ -42,12 +41,12 @@ public class Capacitacion {
 		} while (idCapacitacion == null);
 	}
 
-	public Integer getRun() {
-		return run;
+	public Long getRunClienteCapa() {
+		return runClienteCapa;
 	}
 
-	public void setRun(Integer run) {
-		this.run = run;
+	public void setRun(Long runClienteCapa) {
+		this.runClienteCapa = runClienteCapa;
 	}
 
 	public String getDia() {
@@ -55,10 +54,11 @@ public class Capacitacion {
 	}
 
 	public void setDia(String dia) {
-		System.out.println("Ingrese un dia de la semana");
+
 		if (dia.length() >= 5 && dia.length() <= 7) {
 			this.dia = dia;
-		}
+		}else
+			System.out.println("Ingrese un dia de la semana valido, la próxima vez");
 	}
 
 	public String getHora() {
@@ -70,7 +70,7 @@ public class Capacitacion {
 		if (hora.matches(regex)) {
 			this.hora = hora;
 		} else {
-			System.out.println("La hora introducida debe estar en el siguiente formato: HH:MM");
+			System.out.println("La hora introducida debe estar en el siguiente formato: HH:MM, intentelo en otra ocasión");
 		}
 	}
 
@@ -80,13 +80,15 @@ public class Capacitacion {
 
 	public void setLugar(String lugar) {
 		do {
-			if (lugar.length() <10 && lugar.length() > 50){
-			System.out.println("Ingrese un lugar de capacitacion");
-			lugar = sc.nextLine();
-		}  else if (lugar.length() > 9 && lugar.length() <= 50) {
+			if (lugar.length() >=10 && lugar.length() <= 50){
 				this.lugar = lugar;
+				break;
+			}  else {
+				System.out.println("Ingrese un lugar de capacitación mayor de 10 caracteres y menor de 50 caracteres");
+				lugar = sc.nextLine();
+
 			} 
-		} while (lugar.length() <10 || lugar.length() > 50 ||lugar.isEmpty());
+		} while (true);
 	}
 
 	public String getDuracion() {
@@ -110,29 +112,19 @@ public class Capacitacion {
 			cantAsistentes = Integer.parseInt(sc.nextLine());
 		}else if (cantAsistentes < 1001) {
 				this.cantAsistentes = cantAsistentes;
+				break;
 		}
-		} while (cantAsistentes == null);
-	}
-
-	public void agregarCapacitacion(Cliente c) {
-		clienteCapacitacion.add(c);
-	}
-
-	public void clientesCapacitacion() {
-		for (Cliente c : clienteCapacitacion) {
-			c.analizarUsuario();
-		}
-
+		} while (true);
 	}
 
 	public String mostrarDetalle() {
-		return "La capacitacion sera en " + lugar + " a las " + hora + " del dia " + dia + ", y durara " + duracion
-				+ " minutos";
+		return "La capacitación que sera en " + lugar + " a las " + hora + " del dia " + dia + ", y tendrá una duración de " + duracion;
+
 	}
 
 	@Override
 	public String toString() {
-		return "Rut Cliente: " + run + "\n" + mostrarDetalle() + "\nCantidad de asistentes: " + cantAsistentes + "asistentes.";
+		return " El Usuario cuyo rut es: " + runClienteCapa + " asistirá a " +  mostrarDetalle() + "\n y asistirán : " + cantAsistentes + " asistentes";
 
 	}
 

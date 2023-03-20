@@ -1,33 +1,33 @@
 // Version 1.0
 
-package sprint;
+package sprintCapacitacion;
+
 
 import java.util.Scanner;
 
 /**
- * @Definicion: Clase usuario y se definen los parametros(nombre, fechaNacimiento y rut).
- * @Version: 1.0
+ * Definicion: Clase usuario, utilizada como la clase padre que heredan las clases Cliente, Profesional, Administrativo
+ * Version: 1.0
  * @Autor: Grupo Java (Jose Zamora, Benjamin, Fernanda, Javiera)
  *
- */
+ **/
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+
 
 public class Usuario implements Asesoria {
-	// Creación de los atributos de la Clase Usuario
-	private static ArrayList<Asesoria> clientes = new ArrayList<Asesoria>();
-	protected static String nombre; // nombres que identifica al usuario
-	protected static String fechaNacimiento; // fecha de nacimiento del usuario
-	protected static Integer run = 0; // RUN del usuario (menor a 99.999.999)
+
+	private  String nombreUsuario; // nombres que identifica al usuario
+	private  String fechaNacimientoUsuario; // fecha de nacimiento del usuario
+	private  Long runUsuario; // RUN del usuario (menor a 99.999.999)
 	Scanner sc = new Scanner(System.in);
 
 	// Constructor con todos los parametros.
-	public Usuario(String nombre, String fechaNacimiento, Integer run) {
-		Usuario.nombre = nombre;
-		Usuario.fechaNacimiento = fechaNacimiento;
-		Usuario.run = run;
+	public Usuario(String nombre, String fechaNacimiento, Long run) {
+		this.nombreUsuario = nombre;
+		this.fechaNacimientoUsuario = fechaNacimiento;
+		this.runUsuario = run;
 
 	}
 
@@ -39,8 +39,8 @@ public class Usuario implements Asesoria {
 	 *
 	 * @return nombre el nombre del Usuario.
 	 */
-	public String getNombre() {
-		return nombre;
+	public  String getNombreUsuario() {
+		return nombreUsuario;
 	}
 
 	/**
@@ -49,16 +49,21 @@ public class Usuario implements Asesoria {
 	 * @param nombre el nuevo nombre del Usuario
 	 */
 
-	public void setNombre(String nombre) {
+	public void setNombreUsuario(String nombre) {
 		do {
-			if (nombre.length() < 10 || nombre.length() > 50 || nombre.isEmpty() || nombre.isBlank()) {
-				System.out.println("Ingrese nombre");
+
+			if (nombre.length() >= 10 && nombre.length() <= 50 ) {
+
+				this.nombreUsuario = nombre;
+				break;
+			}else {
+				System.out.println("Ingrese nombre valido, mínimo 10 caracteres y máximo 50");
 				nombre = sc.nextLine();
-			}else if (nombre.length() > 9 && nombre.length() < 51) {
-				Usuario.nombre = nombre;
+
+
 			} 
 
-		} while (nombre.length() < 10 || nombre.length() > 50 || nombre.isEmpty() || nombre.isBlank());
+		} while (true);
 
 	}
 
@@ -68,8 +73,8 @@ public class Usuario implements Asesoria {
 	 * @return fechaNacimiento la fechaNacimiento del Usuario.
 	 */
 
-	public String getFechaNacimiento() {
-		return fechaNacimiento;
+	public  String getFechaNacimientoUsuario() {
+		return fechaNacimientoUsuario;
 	}
 
 	/**
@@ -78,40 +83,57 @@ public class Usuario implements Asesoria {
 	 * @param fechaNacimiento la nueva fechaNacimiento del Usuario.
 	 */
 
-	public void setFechaNacimiento(String fechaNacimiento) {
-		do {
-			String regex = "^(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/\\d{4}$";
+	public void setFechaNacimientoUsuario(String fechaNacimiento) {
+		String regex = "^(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/\\d{4}$";
+		do{
 
-			if (fechaNacimiento.matches(regex)) {
-				Usuario.fechaNacimiento = fechaNacimiento;
-			} else {
-				System.out.println("La fecha no es valida, debe ingresarla en este formato DD/MM/AAAA");
-			}
-		} while (fechaNacimiento == null);
+				if (fechaNacimiento.trim().matches(regex)) {
+
+					this.fechaNacimientoUsuario = fechaNacimiento;
+					break;
+				}else if(fechaNacimiento.trim().length()<10){
+					System.out.println("La fecha no es valida, debe ingresarla en este formato DD/MM/AAAA");
+					fechaNacimiento = sc.nextLine();
+				}else if(fechaNacimiento.trim().length()== 0){
+					System.out.println("La fecha no es valida, debe ingresarla en este formato DD/MM/AAAA");
+					fechaNacimiento = sc.nextLine();
+				} else {
+					System.out.println("La fecha no es valida, debe ingresarla en este formato DD/MM/AAAA");
+					fechaNacimiento = sc.nextLine();
+				}
+		} while (true);
 	}
-
 	// Solicita y retorna el valor de rut.
 	/**
 	 * Devuelve el rut del Usuario
 	 *
 	 * @return rut del Usuario
 	 */
-	public Integer getRun() {
-		return run;
+	public Long getRunUsuario() {
+		return runUsuario;
 	}
 
 	/**
 	 * Establece el run del Usuario
 	 *
-	 * @param Cliente.run el nuevo run del Usuario.
+	 * @param run el nuevo run del Usuario.
 	 */
-	public void setRun(Integer run) {
-		if (run <= 99999999) {
-			Usuario.run = run;
-		}else {
-			System.out.println("Ingrese rut valido");
+	public void setRunUsuario(Long run) {
+
+		do {
+			if (run >=99999999) {
+				System.out.println("Ingrese rut valido, menor a 99.999.999");
+				String input = sc.nextLine();
+				run = Long.parseLong(input);
+			}else {
+
+				this.runUsuario = run;
+				break;
+			}
+
+			}while (true);
+			
 		}
-	}
 
 	public Integer calcularEdad(String fechaNacimiento) {
 		// Parsear la fecha de nacimiento a un objeto LocalDate
@@ -124,20 +146,19 @@ public class Usuario implements Asesoria {
 		return periodo.getYears();
 	}
 
+
+
+	@Override
+	public String toString() {
+		return "Usuario [getNombre()=" + getNombreUsuario() + ", getFechaNacimiento()=" + getFechaNacimientoUsuario() + ", getRun()="
+				+ getRunUsuario() +  "]";
+	}
+
 	public String mostrarEdad() {
-		return "El Usuario: " + nombre + " tiene " + calcularEdad(fechaNacimiento);
+		return "El Usuario: " + nombreUsuario + " tiene " + calcularEdad(fechaNacimientoUsuario);
 	}
 
 	public String analizarUsuario() {
-		return "Usuario [nombre = " + nombre + ", rut: " + run + "]";
+		return "Usuario = " + nombreUsuario + ", rut: " + runUsuario;
 	}
-
-	public static ArrayList<Asesoria> getClientes() {
-		return clientes;
-	}
-
-	public static void setClientes(ArrayList<Asesoria> clientes) {
-		Usuario.clientes = clientes;
-	}
-
 }

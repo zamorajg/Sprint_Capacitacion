@@ -1,10 +1,10 @@
-package sprint;
+package sprintCapacitacion;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * @Definicion: de la Clase: Clase para mantener los Clientes que recibirán los usuarios que se capacitaran
+ * Definicion:  de la Clase: Clase para mantener los Clientes que recibirán los usuarios que se capacitaran
  * @Version: 1.0
  * @Autor: Grupo Java (Jose Zamora, Benjamin, Fernanda, Javiera)
  *
@@ -20,13 +20,13 @@ public class Cliente extends Usuario {
     private int sistemaSalud;
     private String direccion;
     private String comuna;
-    private static int edad;
+    private int edad;
 	Scanner sc = new Scanner(System.in);
-    ArrayList<Capacitacion> capacitaciones = new ArrayList<Capacitacion>(); // lista de Capacitaciones
-    ArrayList<Accidente> accidentes = new ArrayList<Accidente>(); // lista de Accidentes
-    ArrayList<visitaTerreno> visitasTerreno = new ArrayList<visitaTerreno>(); // lista de Visitas en Terreno
+    ArrayList<Capacitacion> capacitaciones; // lista de Capacitaciones
+    ArrayList<Accidente> accidentes; // lista de Accidentes
+    ArrayList<visitaTerreno> visitasTerreno; // lista de Visitas en Terreno
     
-	public Cliente(String nombre, String fechaNacimiento, Integer run, String nombres, String apellidos, int telefono,
+	public Cliente(String nombre, String fechaNacimiento, Long run, String nombres, String apellidos, int telefono,
     		String afp, int sistemaSalud, String direccion, String comuna, int edad, String String) {
     	super(nombre, fechaNacimiento, run);
     	this.nombres = nombres;
@@ -36,11 +36,15 @@ public class Cliente extends Usuario {
     	this.sistemaSalud = sistemaSalud;
     	this.direccion = direccion;
     	this.comuna = comuna;
-    	Cliente.edad = edad;
+    	this.edad = edad;
+        this.capacitaciones = new ArrayList<Capacitacion>();
+        this.accidentes= new ArrayList<Accidente>();
+        this.visitasTerreno = new ArrayList<visitaTerreno>();
     }
 
-    public Cliente () {
-    	super();
+    public Cliente (Usuario usuario) {
+
+        super(usuario.getNombreUsuario(),usuario.getFechaNacimientoUsuario(),usuario.getRunUsuario());
     }
 
     public String getNombres() {
@@ -49,14 +53,18 @@ public class Cliente extends Usuario {
 
 	public void setNombres(String nombres) {
 		do {
-		if (nombres.length() <5 || nombres.length() > 30 || nombres.isEmpty() ) {
-			System.out.println("Ingrese nombres");
-			nombres = sc.nextLine();
-		} else if (nombres.length() > 4 && nombres.length() < 31 ) {
-			this.nombres = nombres;
-		}
-		}while (nombres.length() <5 || nombres.length() > 30 || nombres.isEmpty());
-		}
+            if (nombres.length() >=5 || nombres.length() <= 50) {
+                this.nombres = nombres;
+                break;
+
+            } else {
+                System.out.println("Ingrese nombre valido, mínimo 5 caracteres y máximo 30");
+                nombres = sc.nextLine();
+            }
+		}while (nombres.length() >=5 || nombres.length() <= 50);
+    }
+
+
 
 	/**
      * Devuelve los apellidos del Cliente.
@@ -79,8 +87,9 @@ public class Cliente extends Usuario {
 			apellidos = sc.nextLine();
     	}else if (apellidos.length() > 4 && apellidos.length() < 31 ) {
         this.apellidos = apellidos;
+        break;
     	}
-    	}while (apellidos.length() < 5 || apellidos.length() > 30 || apellidos.isEmpty());
+    	}while (true);
 }
     	
 
@@ -99,17 +108,17 @@ public class Cliente extends Usuario {
      * @param telefono el nuevo telefono del Cliente.
      */
     public void setTelefono(int telefono) {
-    	do {
-    		
+    	do {    		
     	if(telefono == 0) {
     		System.out.println("Ingrese telefono");
 			telefono = Integer.parseInt(sc.nextLine());
     	}else if(telefono !=0) {
         this.telefono = telefono;
+        break;
     	} else {
     	    System.out.println("Ingrese un telefono valido");
     	}
-    	} while (telefono == 0);
+    	} while (true);
     }
 
     /**
@@ -127,10 +136,10 @@ public class Cliente extends Usuario {
      * @param afp  el nuevo AFP del Cliente.
      */
     public void setAfp(String afp) {
-    	if (afp.length() > 4 && afp.length() < 30 ) {
+    	if (afp.length() >= 4 && afp.length() <= 30 ) {
     		this.afp = afp;
-        	} else {
-        	    System.out.println("Ingrese una afp valida");}
+        } else {
+            System.out.println("Ingrese una afp valida, la próxima vez");}
         	
     }
 
@@ -206,7 +215,7 @@ public class Cliente extends Usuario {
      *
      * @return la edad del Cliente.
      */
-    public static int getEdad() {
+    public int getEdad() {
         return edad;
     }
 
@@ -222,11 +231,10 @@ public class Cliente extends Usuario {
 			edad = Integer.parseInt(sc.nextLine());
     	}
     	else if(edad >= 0 && edad < 151) {
-        edad = edad;
-    	}else {
-    		System.out.println("Debe ingresar una edad valida");
-    	} 
-    	}while ( edad < 0 || edad > 150 );
+        this.edad = edad;
+        break;
+    	}
+    	}while ( true);
     }
     
     /**
@@ -254,15 +262,14 @@ public class Cliente extends Usuario {
      */
     @Override
     public String toString() {
-        return "Cliente [rut = " + run + ", nombre = " + nombres + ", apellidos = " + apellidos + ", telefono = " + telefono
+        return "Cliente: " + super.toString() + " [nombre = " + nombres + ", apellidos = " + apellidos + ", telefono = " + telefono
                 + ", afp = " + afp + ", sistemaSalud = " + sistemaSalud + ", direccion = " + direccion + ", comuna = " + comuna
                 + ", edad = " + edad + "]";
     }
     
 	@Override
 	public String analizarUsuario() {
-		return "Los datos del Cliente son: " + super.analizarUsuario() +", direccion = " + direccion + ", comuna = " + comuna +
-               "]";
+		return "Los datos del Cliente= dirección = " + direccion + ", comuna = " + comuna +  super.analizarUsuario();
 		
 	}
     
