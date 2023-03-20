@@ -1,4 +1,4 @@
-package sprint;
+package sprintCapacitacion;
 
 public class Revision {
     private int idRevision;
@@ -7,9 +7,20 @@ public class Revision {
     private String detalleRev;
     private int estadoRev;
 
+    /**
+     * Metodo constructor sin parametros
+     */
     public Revision() {
     }
 
+    /**
+     * Metodo constructor con parametros
+     * @param idRevision
+     * @param idVisita
+     * @param nombreRev
+     * @param detalleRev
+     * @param estadoRev
+     */
     public Revision(int idRevision, int idVisita, String nombreRev, String detalleRev, int estadoRev) {
         this.idRevision = idRevision;
         this.idVisita = idVisita;
@@ -18,22 +29,42 @@ public class Revision {
         this.estadoRev = estadoRev;
     }
 
+    /**
+     * Retorna la ID de la revision
+     * @return idRevision
+     */
     public int getIdRevision() {
         return idRevision;
     }
 
+    /**
+     * Establece la ID de la revision
+     * @param idRevision
+     */
     public void setIdRevision(int idRevision) {
         this.idRevision = idRevision;
     }
 
+    /**
+     * Retorna la ID de la visita
+     * @return idVisita
+     */
     public int getIdVisita() {
         return idVisita;
     }
 
+    /**
+     * Establece la ID de la visita
+     * @param idVisita
+     */
     public void setIdVisita(int idVisita) {
         this.idVisita = idVisita;
     }
 
+    /**
+     * Retorna el nombre de la revision
+     * @return nombreRev
+     */
     public String getNombreRev() {
         return nombreRev;
     }
@@ -55,10 +86,18 @@ public class Revision {
         } while (nombreRev == null || nombreRev.trim().isEmpty());
     }
 
+    /**
+     * Retorna el detalle de la revision
+     * @return detalleRev
+     */
     public String getDetalleRev() {
         return detalleRev;
     }
 
+    /**
+     * Establece que el detalle de la revision tenga menos de 100 caracteres
+     * @param detalleRev
+     */
     public void setDetalleRev(String detalleRev) {
 
             if(detalleRev.length()>100)
@@ -68,10 +107,18 @@ public class Revision {
 
     }
 
+    /**
+     * Retorna el estado de la revision
+     * @return estadoRev
+     */
     public int getEstadoRev() {
         return estadoRev;
     }
 
+    /**
+     * Establece que el estado de la revision sea un numero entre el 1 y el 3, 1 siendo sin problemas, 2 con observaciones y 3 no aprueba
+     * @param estadoRev
+     */
     public void setEstadoRev(int estadoRev) {
 
             if (estadoRev >= 1 && estadoRev <= 3)

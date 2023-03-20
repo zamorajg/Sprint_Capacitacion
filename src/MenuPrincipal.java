@@ -1,16 +1,21 @@
 
-package sprint;
+package sprintCapacitacion;
 
 import java.util.Scanner;
 
-public class MenuPrincipal implements Asesoria {
+/**
+ * Menú principal con nueve opciones: ocho para las acciones indicadas en el listado
+ * anterior, y una opción para salir del programa. En caso de que se ingrese una opción incorrecta,
+ * se debe pedir nuevamente. El programa solo terminará una vez que ingrese la opción de salida
+ */
+public class MenuPrincipal {
 
     // VARIABLES GLOBALES
     static int idCapacitacion = 0; // Correlativo de la Capacitacion
     static int idAccicente = 0; // Correlativo del Accidente
     static int idVisitaTerreno = 0; // Correlativo del Accidente
     static int idRevision = 0; // Correlativo del Accidente
-   
+
     public static void menuOpciones(Contenedor contenedora) {
 
         boolean salir = false;
@@ -18,7 +23,6 @@ public class MenuPrincipal implements Asesoria {
         while (!salir) {    // Menu de opciones, funciona mientras salir sea false
             System.out.println("--------------------MENU---------------------------");
             System.out.println("Por favor escoja una de las opciones del menu:");
-            System.out.println("0-. Almacenar Usuario");
             System.out.println("1-. Almacenar Cliente");
             System.out.println("2-. Almacenar Profesional");
             System.out.println("3-. Almacenar Administrativo");
@@ -29,47 +33,35 @@ public class MenuPrincipal implements Asesoria {
             System.out.println("8-. Listar Capacitaciones");
             System.out.println("9-. Salir");
 
-           Scanner sc = new Scanner(System.in); // Variable que lee el valor introducido por consola
+            Scanner sc = new Scanner(System.in); // Variable que lee el valor introducido por consola
             String opcion = sc.nextLine();
-            
+
 
             switch (opcion) {
-            	case "0":
-	                Contenedor.ingresarUsuario(contenedora);
-	                break;
                 case "1":
                     Contenedor.almacenarCliente(contenedora);
                     break;
                 case "2":
-                	Contenedor.almacenarProfesional(contenedora); 
+                    Contenedor.almacenarProfesional(contenedora);
                     break;
                 case "3":
-                	Contenedor.almacenarAdministrativo(contenedora);
+                    Contenedor.almacenarAdministrativo(contenedora);
                     break;
                 case "4":
-                    System.out.println(" Ingrese el RUN del Cliente que recibirá la Capacitación:");
-                    String input = sc.nextLine();
-                    Long run = Long.parseLong(input);
-                    if(contenedora.buscarRut(run)){
-                        contenedora.almacenarCapacitacion(idCapacitacion,input);
-                    }else{
-                        System.out.println("El Run ingresado no Existe!!, ingrese un Run Valido");
-                    }
+                    Contenedor.almacenarCapacitacion(idCapacitacion, contenedora);
                     break;
                 case "5":
-                    System.out.println(" Ingrese el RUN del Usuario a Eliminar:");
-                     input = sc.nextLine();
-                    //int run = Integer.parseInt(input);
-                    contenedora.eliminarUsuario(input);
+
+                    Contenedor.eliminarUsuario();
                     break;
                 case "6":
-                    contenedora.ListarUsuarios();
+                    Contenedor.ListarUsuarios();
                     break;
                 case "7":
-                    contenedora.ListarUsuariosPorTipo();
+                    Contenedor.ListarUsuariosPorTipo(contenedora);
                     break;
                 case "8":
-                    contenedora.ListarCapacitaciones();
+                    Contenedor.ListarCapacitaciones();
                     break;
                 case "9":
                     salir = true; // vuelve salir true y sale del bucle
@@ -82,12 +74,8 @@ public class MenuPrincipal implements Asesoria {
             } // indica que la opcion ingresada no se encuentra dentro del menu
         }
     }
-
-	@Override
-	public String analizarUsuario() { 
-		return null ;
-	}
 }
+
 
 
 

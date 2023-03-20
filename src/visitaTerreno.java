@@ -1,4 +1,4 @@
-package sprint;
+package sprintCapacitacion;
 
 public class visitaTerreno {
     private int idVisita;
@@ -10,9 +10,21 @@ public class visitaTerreno {
 
     private Revision revision;
 
+    /**
+     * metodo constructor vacio
+     */
     public visitaTerreno() {
     }
 
+    /**
+     * metodo constructor con parametros
+     * @param idVisita
+     * @param rutCliente
+     * @param diaAccidente
+     * @param hora
+     * @param lugar
+     * @param comentarios
+     */
     public visitaTerreno(int idVisita, Long rutCliente, String diaAccidente, String hora, String lugar, String comentarios) {
         this.idVisita = idVisita;
         this.rutCliente = rutCliente;
@@ -24,18 +36,34 @@ public class visitaTerreno {
 
     }
 
+    /**
+     * retorna la ID de la visita a terreno
+     * @return idVisita
+     */
     public int getIdVisita() {
         return idVisita;
     }
 
+    /**
+     * establece la ID de la visita a terreno
+     * @param idVisita
+     */
     public void setIdVisita(int idVisita) {
         this.idVisita = idVisita;
     }
 
+    /**
+     * retorna el rut del cliente
+     * @return rutCliente
+     */
     public long getRutCliente() {
         return rutCliente;
     }
 
+    /**
+     * establece que el rut del cliente debe ser menor o igual a 99.999.999
+     * @param rutCliente
+     */
     public void setRutCliente(Long rutCliente) {
         do {
 
@@ -68,6 +96,10 @@ public class visitaTerreno {
 
     }
 
+    /**
+     * retorna la hora de la visita a terreno
+     * @return hora
+     */
     public String getHora() {
         return hora;
     }
@@ -86,18 +118,34 @@ public class visitaTerreno {
         }
     }
 
+    /**
+     * retorna el lugar de la visita a terreno
+     * @return lugar
+     */
     public String getLugar() {
         return lugar;
     }
 
+    /**
+     * establece el lugar de la visita a terreno
+     * @param lugar
+     */
     public void setLugar(String lugar) {
         this.lugar = lugar;
     }
 
+    /**
+     * retorna los comentarios de la visita a terreno
+     * @return
+     */
     public String getComentarios() {
         return comentarios;
     }
 
+    /**
+     * establece que los comentarios tengan menos de 100 caracteres
+     * @param comentarios
+     */
     public void setComentarios(String comentarios) {
         if (comentarios.length()>100)
             this.comentarios = comentarios;

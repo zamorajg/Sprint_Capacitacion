@@ -1,4 +1,4 @@
-package sprint;
+package sprintCapacitacion;
 
 import java.util.ArrayList;
 

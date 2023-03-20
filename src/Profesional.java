@@ -1,39 +1,72 @@
-package sprint;
+package sprintCapacitacion;
 
+/**
+ * Clase hija de la Clase Usuario que registra a un profesional
+ */
 public class Profesional extends Usuario {
 	private String titulo;
 	private String fechaIngreso;
 	protected static String[][] contenedor; // revisar si es contenedor o usuario
 
-	public Profesional(){
-		super();
+	/**
+	 * Contenedor de la clase profesional que contiene los datos del padre
+	 * @param usuario
+	 */
+	public Profesional(Usuario usuario){
+		super(usuario.getNombreUsuario(),usuario.getFechaNacimientoUsuario(),usuario.getRunUsuario());
+
 	}
+
+	/**
+	 * metodo constructor con parametros
+	 * @param nombre
+	 * @param fechaNacimiento
+	 * @param run
+	 * @param titulo
+	 * @param fechaIngreso
+	 */
 	public Profesional(String nombre, String fechaNacimiento, Long run, String titulo, String fechaIngreso) {
 		super(nombre, fechaNacimiento, run);
 		this.titulo = titulo;
 		this.fechaIngreso = fechaIngreso;		
 	}
 	
+	/**
+	 * retorna el titulo del profesional
+	 * @return titulo
+	 */
 	public String getTitulo() {
 		return titulo;
 	}
 	
+	/**
+	 * establece que el titulo del profesional tenga un largo entre 10 y 50 caracteres
+	 * @param titulo
+	 */
 	public void setTitulo(String titulo) {
 		do {
-			if (titulo.length() < 10 || titulo.length() >50 || titulo == null) {
-				System.out.println("El titulo ingresado debe tener al menos 10 caracteres");
-				titulo = sc.nextLine();
-			}else if (titulo.length() > 9 && titulo.length() < 51 ) {
+			if (titulo.length() >= 10 && titulo.length() <= 50 ) {
 				this.titulo = titulo;
 				break;
-			}
+			}else {
+				System.out.println("El titulo ingresado debe tener al menos 10 caracteres y no exceder de 50.");
+				titulo = sc.nextLine();
+		    }
 		} while (true);
 	}
 	
+	/**
+	 * retorna la fecha de ingreso del profesional
+	 * @return fechaIngreso
+	 */
 	public String getFechaIngreso() {
 		return fechaIngreso;
 	}
 	
+	/**
+	 * establece que la fecha de ingreso tenga formato DD/MM/AA
+	 * @param fechaIngreso
+	 */
 	public void setFechaIngreso(String fechaIngreso) {
 		
         String regex = "^(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/\\d{4}$";
@@ -42,18 +75,19 @@ public class Profesional extends Usuario {
         	this.fechaIngreso = fechaIngreso;
         }
         else {
-            System.out.println("La fecha no es valida, debe ingresarla en este formato DD/MM/AAAA");
+            System.out.println("La fecha no es valida, debe ingresarla en este formato DD/MM/AAAA,la próxima vez");
+
         }
 	}
 
 	@Override
 	public String analizarUsuario() {
-		return "El profesional " + super.analizarUsuario() + " posee el titulo de " + titulo + " y su fecha de ingreso es " + fechaIngreso;
+		return "El profesional posee el titulo de " + titulo + " y su fecha de ingreso es " + fechaIngreso + " "+ super.analizarUsuario() ;
 		
 	}
 	@Override
 	public String toString() {
-		return "Profesional [titulo=" + titulo + ", fechaIngreso=" + fechaIngreso + "]";
+		return "Profesional: " + super.toString() + " [titulo=" + titulo + ", fechaIngreso=" + fechaIngreso + "]";
 	}
 
 }
