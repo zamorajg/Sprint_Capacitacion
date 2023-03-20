@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * @Definicion: de la Clase: Clase para mantener los Clientes que recibirán los usuarios que se capacitaran
+ * Definicion:  de la Clase: Clase para mantener los Clientes que recibirán los usuarios que se capacitaran
  * @Version: 1.0
  * @Autor: Grupo Java (Jose Zamora, Benjamin, Fernanda, Javiera)
  *
@@ -21,10 +21,13 @@ public class Cliente extends Usuario {
     private String direccion;
     private String comuna;
     private int edad;
+	private int cantCapacitaciones;
+    private int cantAccidentes;
+    private int cantVisitas;
 	Scanner sc = new Scanner(System.in);
-    ArrayList<Capacitacion> capacitaciones = new ArrayList<Capacitacion>(); // lista de Capacitaciones
-    ArrayList<Accidente> accidentes = new ArrayList<Accidente>(); // lista de Accidentes
-    ArrayList<visitaTerreno> visitasTerreno = new ArrayList<visitaTerreno>(); // lista de Visitas en Terreno
+	ArrayList<Capacitacion> capacitaciones; // lista de Capacitaciones
+    ArrayList<Accidente> accidentes; // lista de Accidentes
+    ArrayList<visitaTerreno> visitasTerreno; // lista de Visitas en Terreno
     
 	public Cliente(String nombre, String fechaNacimiento, Long run, String nombres, String apellidos, int telefono,
     		String afp, int sistemaSalud, String direccion, String comuna, int edad, String String) {
@@ -37,27 +40,36 @@ public class Cliente extends Usuario {
     	this.direccion = direccion;
     	this.comuna = comuna;
     	this.edad = edad;
+        this.capacitaciones = new ArrayList<Capacitacion>();
+        this.accidentes= new ArrayList<Accidente>();
+        this.visitasTerreno = new ArrayList<visitaTerreno>();
     }
 
     public Cliente () {
-    	super();
     }
 
-    public String getNombres() {
+    public Cliente(Usuario usuario) {
+    	super();
+	}
+
+	public String getNombres() {
 		return nombres;
 	}
 
 	public void setNombres(String nombres) {
 		do {
-		if (nombres.length() <5 || nombres.length() > 30 || nombres.isEmpty() ) {
-			System.out.println("Ingrese nombres");
-			nombres = sc.nextLine();
-		} else if (nombres.length() > 4 && nombres.length() < 31 ) {
-			this.nombres = nombres;
-			break;
-		}
-		}while (true);
-		}
+            if (nombres.length() >=5 || nombres.length() <= 50) {
+                this.nombres = nombres;
+                break;
+
+            } else {
+                System.out.println("Ingrese nombre valido, mínimo 5 caracteres y máximo 30");
+                nombres = sc.nextLine();
+            }
+		}while (nombres.length() >=5 || nombres.length() <= 50);
+    }
+
+
 
 	/**
      * Devuelve los apellidos del Cliente.
@@ -129,7 +141,7 @@ public class Cliente extends Usuario {
      * @param afp  el nuevo AFP del Cliente.
      */
     public void setAfp(String afp) {
-    	if (afp.length() > 4 && afp.length() < 30 ) {
+    	if (afp.length() > 3 && afp.length() < 31 ) {
     		this.afp = afp;
         	} else {
         	    System.out.println("Ingrese una afp valida");}
@@ -230,44 +242,78 @@ public class Cliente extends Usuario {
     	}while ( true);
     }
     
-    /**
-     * Devuelve la cantidad de accidentes asociadas al Cliente.
-     *
-     * @return cantidad de accidentes del cliente.
-     */
-    
-   // public int getCantidadAccidentes() {
-	//	return cantidadAccidentes;}
-    
-    /**
-     * Establece la cantidad de accidentes por cliente.
-     *
-     * @param accidentes del Cliente.
-     */
+	public String obtenerSistemaSalud(int sistemaSalud) {
+		if(sistemaSalud == 1) {
+			return "FONASA";
+		}
+		else {
+			return "ISAPRE";
+		}
+	}
+	
+    public int getCantCapacitaciones() {
+		return cantCapacitaciones;
+	}
 
-	//public void setCantidadAccidentes(int cantidadAccidentes) {
-	//	this.cantidadAccidentes = cantidadAccidentes;}
+	public void setCantCapacitaciones(int cantCapacitaciones) {
+		this.cantCapacitaciones = cantCapacitaciones;
+	}
 
-    /**
-     * Devuelve una representación en cadena de la instancia de la clase Cliente
-     *
-     * @return Una representación en cadena de la instancia de la clase Cliente
-     */
+	public int getCantAccidentes() {
+		return cantAccidentes;
+	}
+
+	public void setCantAccidentes(int cantAccidentes) {
+		this.cantAccidentes = cantAccidentes;
+	}
+
+	public int getCantVisitas() {
+		return cantVisitas;
+	}
+
+	public void setCantVisitas(int cantVisitas) {
+		this.cantVisitas = cantVisitas;
+	}
+	
+	public int getRun() {
+		return 0;
+	}
+    
+    public ArrayList<Capacitacion> getCapacitaciones() {
+		return capacitaciones;
+	}
+
+	public void setCapacitaciones(ArrayList<Capacitacion> capacitaciones) {
+		this.capacitaciones = capacitaciones;
+	}
+
+	public ArrayList<Accidente> getAccidentes() {
+		return accidentes;
+	}
+
+	public void setAccidentes(ArrayList<Accidente> accidentes) {
+		this.accidentes = accidentes;
+	}
+
+	public ArrayList<visitaTerreno> getVisitasTerreno() {
+		return visitasTerreno;
+	}
+
+	public void setVisitasTerreno(ArrayList<visitaTerreno> visitasTerreno) {
+		this.visitasTerreno = visitasTerreno;
+	}
+	
     @Override
     public String toString() {
-        return "Cliente [rut = " + run + ", nombre = " + nombres + ", apellidos = " + apellidos + ", telefono = " + telefono
+        return "Cliente: " + super.toString() + " [nombre = " + nombres + ", apellidos = " + apellidos + ", telefono = " + telefono
                 + ", afp = " + afp + ", sistemaSalud = " + sistemaSalud + ", direccion = " + direccion + ", comuna = " + comuna
                 + ", edad = " + edad + "]";
     }
     
 	@Override
 	public String analizarUsuario() {
-		return "Los datos del Cliente son: " + super.analizarUsuario() +", direccion = " + direccion + ", comuna = " + comuna +
-               "]";
+		return "Los datos del Cliente= dirección = " + direccion + ", comuna = " + comuna +  super.analizarUsuario();
 		
 	}
-    
-
-
 }
 

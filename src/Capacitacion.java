@@ -6,9 +6,8 @@ import java.util.Scanner;
 
 public class Capacitacion {
 
-	private List<Cliente> clienteCapacitacion = new ArrayList<Cliente>();
 	private Integer idCapacitacion;
-	private Long runClienteCapa; // revisar nombre
+	private Long rutClienteCapa; // revisar nombre
 	private String dia;
 	private String hora;
 	private String lugar;
@@ -19,7 +18,7 @@ public class Capacitacion {
 	public Capacitacion(int idCapacitacion, Long runClienteCapa, String dia, String hora, String lugar, String duracion,
 			int cantAsistentes) {
 		this.idCapacitacion = idCapacitacion;
-		this.runClienteCapa = runClienteCapa;
+		this.rutClienteCapa = runClienteCapa;
 		this.dia = dia;
 		this.hora = hora;
 		this.lugar = lugar;
@@ -43,11 +42,11 @@ public class Capacitacion {
 	}
 
 	public Long getRunClienteCapa() {
-		return runClienteCapa;
+		return rutClienteCapa;
 	}
 
 	public void setRun(Long runClienteCapa) {
-		this.runClienteCapa = runClienteCapa;
+		this.rutClienteCapa = runClienteCapa;
 	}
 
 	public String getDia() {
@@ -56,7 +55,13 @@ public class Capacitacion {
 
 	public void setDia(String dia) {
 		System.out.println("Ingrese un dia de la semana");
-		if (dia.length() >= 5 && dia.length() <= 7) {
+		if (dia == ("Lunes") || dia == ("lunes") ||
+				dia == ("Martes") || dia == ("martes") ||
+				dia == ("Miercoles") || dia == ("miercoles") ||
+				dia == ("Jueves") || dia == ("jueves") ||
+				dia == ("Viernes") || dia == ("vienes") ||
+				dia == ("Sabado") || dia == ("sabado") ||
+				dia == ("Domingo") || dia == ("domingo")) {
 			this.dia = dia;
 		}
 	}
@@ -116,17 +121,6 @@ public class Capacitacion {
 		} while (true);
 	}
 
-	public void agregarCapacitacion(Cliente c) {
-		clienteCapacitacion.add(c);
-	}
-
-	public void clientesCapacitacion() {
-		for (Cliente c : clienteCapacitacion) {
-			c.analizarUsuario();
-		}
-
-	}
-
 	public String mostrarDetalle() {
 		return "La capacitacion sera en " + lugar + " a las " + hora + " del dia " + dia + ", y durara " + duracion
 				+ " minutos";
@@ -134,7 +128,7 @@ public class Capacitacion {
 
 	@Override
 	public String toString() {
-		return "Rut Cliente: " + runClienteCapa + "\n" + mostrarDetalle() + "\nCantidad de asistentes: " + cantAsistentes + "asistentes.";
+		return "Rut Cliente: " + rutClienteCapa + "\n" + mostrarDetalle() + "\nCantidad de asistentes: " + cantAsistentes + "asistentes.";
 
 	}
 

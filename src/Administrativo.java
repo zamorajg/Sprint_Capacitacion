@@ -1,13 +1,17 @@
 package sprint;
 
+
 public class Administrativo extends Usuario{
 	private String experienciaPrevia;
 	private String area;
 	protected static String[][] contenedor;  // revisar si es usuario o contenedor
 
 
+	/**
+	 * Constructor de la clase administrativo que recibe los datos del Objeto padre
+	 * @param usuario
+	 */
 	public Administrativo() {
-		super();
 	}
 	
 	public Administrativo(String nombre, String fechaNacimiento, Long run, String experienciaPrevia, String area) {
@@ -18,6 +22,10 @@ public class Administrativo extends Usuario{
 		
 	}
 	
+	public Administrativo(Usuario usuario) {
+		super();
+	}
+
 	public String getExperienciaPrevia() {
 		return experienciaPrevia;
 	}
@@ -38,6 +46,7 @@ public class Administrativo extends Usuario{
 		do {
 		if (area.length() > 4 && area.length() <21) {
 			this.area = area;
+			break;
 		}else {
 			System.out.println("Ingrese un area valida");
 		} 
@@ -46,12 +55,11 @@ public class Administrativo extends Usuario{
 
 	@Override
 	public String analizarUsuario() {
-		return "El administrativo " + super.analizarUsuario() + " su experiencia es " + experienciaPrevia + " y pertenece al area " + area;
+		return "El administrativo "+ analizarUsuario() +" tiene una experiencia de " + experienciaPrevia + " años y pertenece al area de " + area;
 		
 	}
 	@Override
 	public String toString() {
-		return "Administrativo [getExperienciaPrevia()=" + getExperienciaPrevia() + ", getArea()=" + getArea()
-				+ ", analizarUsuario()=" + analizarUsuario() + "]";
+		return "Administrativo: " + super.toString() + "Experiencia previa: " + getExperienciaPrevia() + "Area: " + getArea()+ "]";
 	}
 }
