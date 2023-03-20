@@ -26,7 +26,7 @@ public class ListaCapacitaciones {
         for (int i = 0; i < listaCapacitaciones.size(); i++) {
 
             System.out.println(listaCapacitaciones.get(i).toString()); // Ojo debe tenet un método que muestre las capacitaciones
-            listaCapacitaciones.get(i).getRutCliente();
+            listaCapacitaciones.get(i).getRunClienteCapa();
 
         }
     }
