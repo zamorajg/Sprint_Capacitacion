@@ -1,7 +1,12 @@
-package sprintCapacitacion;
+package sprintJavaFinal;
 
 import java.util.ArrayList;
 
+/**
+ * Lista las capacitaciones a las cuales puede asistir cualquier tipo de usuario
+ * @author Jose Zamora, Benjamin Pavez, Maria Fernanda Zuñiga, Javiera Saavedra
+ *
+ */
 public class ListaCapacitaciones {
     ArrayList<Capacitacion> listaCapacitaciones;
 

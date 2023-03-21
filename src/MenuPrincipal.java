@@ -1,5 +1,5 @@
 
-package sprintCapacitacion;
+package sprintJavaFinal;
 
 import java.util.Scanner;
 
@@ -8,6 +8,8 @@ import java.util.Scanner;
  * anterior, y una opción para salir del programa. En caso de que se ingrese una opción incorrecta,
  * se debe pedir nuevamente. El programa solo terminará una vez que ingrese la opción de salida
  */
+
+
 public class MenuPrincipal {
 
     // VARIABLES GLOBALES
@@ -19,7 +21,7 @@ public class MenuPrincipal {
     public static void menuOpciones(Contenedor contenedora) {
 
         boolean salir = false;
-
+try {
         while (!salir) {    // Menu de opciones, funciona mientras salir sea false
             System.out.println("--------------------MENU---------------------------");
             System.out.println("Por favor escoja una de las opciones del menu:");
@@ -69,13 +71,12 @@ public class MenuPrincipal {
                     Contenedor.almacenarAccidente(idAccidente, contenedora);                    
                     break;
                 case "10":
-                	Contenedor.almacenarVisitaTerreno(idVisitaTerreno, contenedora);
-                	System.out.println("Debe crear la revision de la visita");
-                	Contenedor.almacenarRevision(idVisitaTerreno, idRevision, contenedora);
-                	break;
+                	Contenedor.almacenarVisitaTerreno(idVisitaTerreno, contenedora,idRevision);
+                	 break;
                 case "11":
                     salir = true; // vuelve salir true y sale del bucle
                     System.out.println("Saliendo del programa");
+                    System.exit(1);
                     break;
 
                 default:
@@ -83,7 +84,12 @@ public class MenuPrincipal {
                     break;
             } // indica que la opcion ingresada no se encuentra dentro del menu
         }
+    } catch(Exception e) {
+    	System.out.println("Error!" + "\nVolviendo al menu");
+    }finally {
+    	menuOpciones(contenedora);
     }
+}
 }
 
 

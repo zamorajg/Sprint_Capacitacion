@@ -1,6 +1,4 @@
-// Version 1.0
-
-package sprintCapacitacion;
+package sprintJavaFinal;
 
 
 import java.util.Scanner;
@@ -150,8 +148,8 @@ public class Usuario implements Asesoria {
 
 	@Override
 	public String toString() {
-		return "Usuario [getNombre()=" + getNombreUsuario() + ", getFechaNacimiento()=" + getFechaNacimientoUsuario() + ", getRun()="
-				+ getRunUsuario() +  "]";
+		return "\nNombre de Usuario: " + getNombreUsuario() + "\nFecha de nacimiento: " + getFechaNacimientoUsuario() + "\nRUT: "
+				+ getRunUsuario();
 	}
 
 	public String mostrarEdad() {
@@ -159,6 +157,6 @@ public class Usuario implements Asesoria {
 	}
 
 	public String analizarUsuario() {
-		return "Usuario = " + nombreUsuario + ", rut: " + runUsuario;
+		return "Usuario: " + nombreUsuario + "\nRUT: " + runUsuario;
 	}
 }

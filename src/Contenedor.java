@@ -1,15 +1,22 @@
-package sprintCapacitacion;
+package sprintJavaFinal;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
+/**
+ * Clase la cual tiene declarado como atributos dos listas: una lista  de instancias de la interface Asesoria,
+ * y una lista de objetos de la clase Capacitacion. En la  primera lista se pueden  almacenar distintos tipos
+ * de usuarios y contiene los siguientes métodos:
+ * Almacenar cliente,Almacenar profesional, Almacenar administrativo,Almacenar capacitación, Eliminar usuario
+ * Listar usuarios, Listar usuarios por tipo y Listar capacitaciones
+ */
 public class Contenedor {
-	public static ArrayList<Revision> RevisionVisita = new ArrayList<Revision>();;
-	public static ArrayList<visitaTerreno> VisitaTerreno = new ArrayList<visitaTerreno>();;
+
+
 	public static ArrayList<Asesoria> asesorias = new ArrayList<Asesoria>();;
 	public static ArrayList<Capacitacion> capacitaciones = new ArrayList<Capacitacion>();;
-	public static ArrayList<Accidente> accidentes = new ArrayList<Accidente>();
+
 	public static Scanner sc = new Scanner(System.in);
 	public static String input = "";
 	public static boolean existe = false;
@@ -17,19 +24,19 @@ public class Contenedor {
 	private  Contenedor contenedora;
 
 	/**
-	 * Método que permite crear un nuevo Usuario que estara asociado ay sea a un Cliente, profesional o Administrativo
-	 * 
+	 * Método que permite crear un nuevo Usuario que estara asociado ya sea a un Cliente, profesional o Administrativo
 	 * @param contenedora
+	 * @return user
 	 */
-	
-	public static Usuario  ingresarUsuario(Contenedor contenedora) {
-		long run =0;
+		public static Usuario  ingresarUsuario(Contenedor contenedora) {
+
 		Usuario user = new Usuario();
 		do{
 			System.out.println("Ingrese un rut numérico menor a 99.999.999(*)");
-			input = sc.nextLine();
+			 input = sc.nextLine();
+
 			if (esNumerico(input)) {
-				run = Long.parseLong(input);
+				long run = Long.parseLong(input);
 				if (buscarRut(input)==false) {
 					user.setRunUsuario(run);
 					break;
@@ -69,7 +76,10 @@ public class Contenedor {
 
 
 }
-	
+	/**
+	 * Método que permite el registro de un cliente en la lista de asesorías
+	 * @param contenedora
+	 */
 	public static void almacenarCliente(Contenedor contenedora) {
 		Usuario usuario = ingresarUsuario(contenedora);
 
@@ -154,7 +164,6 @@ public class Contenedor {
 
 		System.out.println("El Cliente ha sido guardado exitosamente.");
 		Asesoria clienteA = (Asesoria) cliente;
-		// asesorias.add(cliente);
 
 		asesorias.add(clienteA);
 	}
@@ -235,14 +244,13 @@ public class Contenedor {
 	/**
 	 * Método que permite agregar un nuevo Capacitación a la lista de instancias de
 	 * la clase capacitación
-	 * 
 	 * @param idCapacitacion
 	 * @param contenedora
 	 */
-	public static void almacenarCapacitacion(int idCapacitacion, Contenedor contenedora) { // Ojo cambiar por int Run
+	public static void almacenarCapacitacion(int idCapacitacion, Contenedor contenedora) {
 
 
-		// Ingreso los datos de la Capacitacion
+		// Ingreso los datos de la Capacitación
 		Capacitacion capacitacion = new Capacitacion();
 		// Identificador: obligatorio, número interno de la capacitación manejado por la
 		// empresa
@@ -263,9 +271,8 @@ public class Contenedor {
 
 			}
 		}while( input.trim().isEmpty());
-		// Día: texto, día de la semana. Debe ser un valor permitido entre “lunes” y
-		// “Domingo”(en ese formato)
-		System.out.println("Ingrese el Día de la semana. Debe ser un valor permitido entre “lunes” y “Domingo”");
+		// Día: texto, día de la semana. Debe ser un valor permitido entre “lunes” y “Domingo”(en ese formato)
+		System.out.println("Escriba el Día de la semana “Lunes”..“Miercoles”.. “Domingo”");
 		input = sc.nextLine();
 		capacitacion.setDia(input);
 		// Hora: debe ser una hora válida del día, en formato HH:MM (hora desde 0 a23,
@@ -299,37 +306,39 @@ public class Contenedor {
 
 		}while(input.trim().isEmpty());
 
-
-
-
 		capacitaciones.add(capacitacion);
 	}
 
-	
-	public static void almacenarVisitaTerreno(int idVisitaTerreno, Contenedor contenedora) { // Ojo cambiar por int Run
+	/**
+	 * Método que permite agregar una nueva visita en Terreno
+	 * @param idVisitaTerreno
+	 * @param contenedora
+	 */
+	public static void almacenarVisitaTerreno(int idVisitaTerreno, Contenedor contenedora,int idRevision) {
 
-
-		// Ingreso los datos de la Capacitacion
-		visitaTerreno visitaTerreno = new visitaTerreno();
-		// Identificador: obligatorio, número interno de la capacitación manejado por la
-		// empresa
+		long rutVisita=0;
+		// Ingreso los datos de la Visita
+		sprintJavaFinal.VisitaTerreno visitaTerreno = new VisitaTerreno();
+		// Identificador: obligatorio, número interno de la visita manejado por la  empresa
 		visitaTerreno.setIdVisita(idVisitaTerreno++);
 		// RUT cliente: obligatorio
-		do{
+
+		do {
 			System.out.println("Ingrese el rut que registra la visita en formato numérico menor a 99.999.999(*)");
 			input = sc.nextLine();
+
 			if (esNumerico(input)) {
-				long run = Long.parseLong(input);
-				if (buscarRut(input)==false) {
+				rutVisita = Long.parseLong(input);
+				if (buscarRut(input) == false) {
 					System.out.println("El rut ingresado, no existe ,ingrese otro rut");
 					MenuPrincipal.menuOpciones(contenedora);
-				}else {
-					visitaTerreno.setRutCliente(run);
+				} else {
+					visitaTerreno.setRutCliente(rutVisita);
 					break;
 				}
 
 			}
-		}while( input.trim().isEmpty());
+		} while (input.trim().isEmpty());
 		// Día: texto, día de la semana. Debe ser un valor permitido entre “lunes” y
 		// “Domingo”(en ese formato)
 		System.out.println("Ingrese la fecha de la visita (DD/MM/AAAA)");
@@ -350,11 +359,48 @@ public class Contenedor {
 		visitaTerreno.setComentarios(input);
 
 
-		VisitaTerreno.add(visitaTerreno);
-		System.out.println("Visita en terreno registrada.");
-		System.out.println(visitaTerreno.toString());
+		for (int i = 0; i < asesorias.size(); i++) {
+			Cliente cliente = (Cliente) asesorias.get(i); // CASTING PARA OBTENER EL RUT DEL USUARIO
+			if (cliente.getRunUsuario() == rutVisita) {
+				cliente.agregarVisitaTerreno(visitaTerreno); // agrego a la lista del cliente las visitas
+				break;
+			}
+
+		}
+
+		System.out.println("Visita en terreno registrada Satisfactoriamente." + visitaTerreno.toString());
+
+		Revision revision = new Revision();
+		revision.setIdVisita(idVisitaTerreno);
+		revision.setIdRevision(idRevision++);
+
+		System.out.println("Ingrese nombre de la revision(minimo 10 caracteres, maximo 50):");
+		input = sc.nextLine();
+		revision.setNombreRev(input);
+		// Lugar: obligatorio, mínimo 10 caracteres, máximo 50
+		System.out.println("Ingrese detalle a revisar(máximo 100 caracteres): ");
+		input = sc.nextLine();
+		revision.setDetalleRev(input);
+		// Comentarios: máximo 100 caracteres
+		System.out.println("Ingrese estado de la revision(1(sin problemas),2(con observaciones),3(no aprueba))");
+		input = sc.nextLine();
+		revision.setEstadoRev(Integer.parseInt(input));
+
+
+		visitaTerreno.agregarRevision(revision);
+		System.out.println("Revision visita registrada." +revision.toString());
+
+		//almacenarRevision(idVisitaTerreno,idRevision,contenedora);
+
 	}
-	public static void almacenarRevision(int idVisita, int idRevision, Contenedor contenedora) { // Ojo cambiar por int Run
+
+	/**
+	 * Metodo que almacena una Revisión de la visita
+	 * @param idVisita
+	 * @param idRevision
+	 * @param contenedora
+	 */
+	/*public static void almacenarRevision(int idVisita, int idRevision, Contenedor contenedora) { // Ojo cambiar por int Run
 
 
 		// Ingreso los datos de la Capacitacion
@@ -362,8 +408,7 @@ public class Contenedor {
 		// Identificador: obligatorio, número interno de la capacitación manejado por la
 		// empresa
 		revisionVisita.setIdRevision(idRevision++);
-		revisionVisita.setIdVisita(idVisita);
-		System.out.println("Valor: " + idRevision + "Valor: " + idVisita);
+		revisionVisita.setIdVisita(idVisita++);
 		System.out.println("Ingrese nombre de la revision(minimo 10 caracteres, maximo 50):");
 		input = sc.nextLine();
 		
@@ -380,8 +425,7 @@ public class Contenedor {
 
 		RevisionVisita.add(revisionVisita);
 		System.out.println("Revision visita registrada.");
-		System.out.println(revisionVisita.toString());
-	}
+	}*/
 
 	
 	/**
@@ -417,22 +461,23 @@ public class Contenedor {
 	public static void almacenarAccidente(int idAccidente, Contenedor contenedora) { // Ojo cambiar por int Run
 
 
-		// Ingreso los datos de la Capacitacion
+		// Ingreso los datos del accidente
 		Accidente accidente = new Accidente();
 		// Identificador: obligatorio, número interno de la capacitación manejado por la
 		// empresa
 		accidente.setIdAccidente(idAccidente++);
 		// RUT cliente: obligatorio
+		long runAcc = 0;
 		do{
 			System.out.println("Ingrese el rut que registra el accidente en formato numérico menor a 99.999.999(*)");
 			input = sc.nextLine();
 			if (esNumerico(input)) {
-				long run = Long.parseLong(input);
+				runAcc = Long.parseLong(input);
 				if (buscarRut(input)==false) {
 					System.out.println("El rut ingresado, no existe ,ingrese otro rut");
 					MenuPrincipal.menuOpciones(contenedora);
 				}else {
-					accidente.setRun(run);
+					accidente.setRun(runAcc);
 					break;
 				}
 
@@ -461,9 +506,15 @@ public class Contenedor {
 		input = sc.nextLine();
 		accidente.setConsecuencias(input);
 
-		accidentes.add(accidente);
-		System.out.println("Accidente registrado.");
-		System.out.println(accidente.toString());
+		for (int i = 0; i < asesorias.size(); i++) {
+			Cliente cliente = (Cliente) asesorias.get(i); // CASTING PARA OBTENER EL RUT DEL USUARIO
+			if (cliente.getRunUsuario() == runAcc) {
+				cliente.agregarAccidente(accidente); // agrego a la lista del cliente las visitas
+				break;
+			}
+
+		}
+		System.out.println("Accidente registrado. Datos" + accidente.toString());
 	}
 
 	/**

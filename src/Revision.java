@@ -1,5 +1,17 @@
-package sprintCapacitacion;
+package sprintJavaFinal;
 
+import java.util.Scanner;
+
+/**
+ * Clase que registra las revisiones con los siguientes atributos
+ * - Identificador de la revisión: obligatorio, número interno manejado por la compañía.
+ * - Identificador de la visita en terreno: obligatorio, número de la vista a la
+ *  que seasóciala revisión.
+ * - Nombre alusivo a la revisión: obligatorio, mínimo 10 caracteres, máximo 50
+ * - Detalle para revisar: máximo 100 caracteres
+ * - Estado: 1 (sin problemas), 2 (con observaciones), 3 (no aprueba), solo se
+ *  pueden ingresar los valores antes indicados.
+ */
 public class Revision {
     private int idRevision;
     private int idVisita;
@@ -7,9 +19,22 @@ public class Revision {
     private String detalleRev;
     private int estadoRev;
 
+    Scanner sc = new Scanner(System.in);
+
+    /**
+     * Constructor de la clase Revision que no recibe parametros
+     */
     public Revision() {
     }
 
+    /**
+     * Constructor con todos sus parametros
+     * @param idRevision
+     * @param idVisita
+     * @param nombreRev
+     * @param detalleRev
+     * @param estadoRev
+     */
     public Revision(int idRevision, int idVisita, String nombreRev, String detalleRev, int estadoRev) {
         this.idRevision = idRevision;
         this.idVisita = idVisita;
@@ -23,7 +48,6 @@ public class Revision {
     }
 
     public void setIdRevision(int idRevision) {
-    	System.out.println("Valor de la revision: " + idRevision);
         this.idRevision = idRevision;
     }
 
@@ -51,6 +75,7 @@ public class Revision {
                 System.out.println("El nombre debe tener mínimo 10 caracteres y máximo 50");
             }else{
                 this.nombreRev = nombreRev;
+                nombreRev = sc.nextLine();
             }
 
         } while (nombreRev == null || nombreRev.trim().isEmpty());
@@ -62,10 +87,11 @@ public class Revision {
 
     public void setDetalleRev(String detalleRev) {
 
-            if(detalleRev.length()<100)
-                System.out.println("El detalle de la revisión no debe exceder de 100 caracteres");
-            else
-                this.detalleRev = detalleRev;
+        if (detalleRev.length() <= 100){
+            System.out.println("El detalle de la revisión no debe exceder de 100 caracteres");
+        detalleRev = sc.nextLine();
+        }else{
+                this.detalleRev = detalleRev;}
 
     }
 
@@ -77,9 +103,11 @@ public class Revision {
 
             if (estadoRev >= 1 && estadoRev <= 3)
                 this.estadoRev = estadoRev;
-            else
+            else {
                 System.out.println("Ingrese un valor del estado  entre 1 y 3"
-                        +"\n Estado: 1 (sin problemas), 2 (con observaciones), 3 (No aprueba)");
+                        + "\n Estado: 1 (sin problemas), 2 (con observaciones), 3 (No aprueba)");
+                estadoRev = Integer.parseInt(sc.nextLine());
+                }
 
     }
 

@@ -1,4 +1,4 @@
-package sprintCapacitacion;
+package sprintJavaFinal;
 
 /**
  * Clase hija de la Clase Usuario que registra a un profesional
@@ -6,7 +6,7 @@ package sprintCapacitacion;
 public class Profesional extends Usuario {
 	private String titulo;
 	private String fechaIngreso;
-	protected static String[][] contenedor; // revisar si es contenedor o usuario
+
 
 	/**
 	 * Contenedor de la clase profesional que contiene los datos del padre
@@ -64,7 +64,7 @@ public class Profesional extends Usuario {
 	}
 	@Override
 	public String toString() {
-		return "Profesional: " + super.toString() + " [titulo=" + titulo + ", fechaIngreso=" + fechaIngreso + "]";
+		return "Profesional: " + super.toString() + "\nTitulo: " + titulo + "\nFecha de ingreso: " + fechaIngreso;
 	}
 
 }
